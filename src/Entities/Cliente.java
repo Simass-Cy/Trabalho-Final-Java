@@ -1,13 +1,18 @@
 package Entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cliente {
+
     private long id;
     private String nome;
     private int senha;
     private String email;
     private String telefone;
+    private List<Animais> animais = new ArrayList<>();
 
-    // no args constructor
+   //no args constructor
     public Cliente() {
     }
 
@@ -20,6 +25,7 @@ public class Cliente {
         this.telefone = telefone;
     }
 
+    //getters e setters
     public long getId() {
         return id;
     }
@@ -58,5 +64,13 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public List<Animais> getAnimais() {
+        return animais;
+    }
+
+    public void setAnimais(List<Animais> animais) {
+        this.animais = animais;
     }
 }

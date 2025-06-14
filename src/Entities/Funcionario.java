@@ -12,6 +12,7 @@ public abstract class Funcionario {
     private String emailFuncionario;
     private String nomeFuncionario;
     private String telefoneFuncionario;
+    private String senhaFuncionario;
 
     //no args constructor
     public Funcionario() {
@@ -25,6 +26,12 @@ public abstract class Funcionario {
         this.emailFuncionario = emailFuncionario;
         this.nomeFuncionario = nomeFuncionario;
         this.telefoneFuncionario = telefoneFuncionario;
+    }
+
+    //construtor sobrecarregado
+    public Funcionario(Long idFuncionario, Cargo cargo, String descricaoFuncaoFuncionario, String emailFuncionario, String nomeFuncionario, String telefoneFuncionario, String senhaFuncionario) {
+        this(idFuncionario,cargo,descricaoFuncaoFuncionario,emailFuncionario,nomeFuncionario,telefoneFuncionario);
+        this.senhaFuncionario = senhaFuncionario;
     }
 
     //get e set

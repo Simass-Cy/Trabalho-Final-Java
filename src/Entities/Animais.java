@@ -1,20 +1,31 @@
 package Entities;
 
-public class Animais extends Cliente {
+public class Animais {
 
     private String nomeAnimal;
     private Long idAnimal;
     private String dataNascimentoAnimal;
     private int idadeAnimal;
+    private Cliente dono;
 
-    public Animais(String nomeAnimal, Long idAnimal, String dataNascimentoAnimal, int idadeAnimal) {
+    //all args constructor
+
+    public Animais(String nomeAnimal, Long idAnimal, String dataNascimentoAnimal, int idadeAnimal, Cliente dono) {
         this.nomeAnimal = nomeAnimal;
         this.idAnimal = idAnimal;
         this.dataNascimentoAnimal = dataNascimentoAnimal;
         this.idadeAnimal = idadeAnimal;
+        this.dono = dono;
     }
 
-    //get e set
+    //no args constructor
+
+    public Animais() {
+    }
+
+    //gets e sets
+
+
     public String getNomeAnimal() {
         return nomeAnimal;
     }
@@ -46,4 +57,13 @@ public class Animais extends Cliente {
     public void setIdadeAnimal(int idadeAnimal) {
         this.idadeAnimal = idadeAnimal;
     }
+
+    public Cliente getDono() {
+        return dono;
+    }
+
+    public void setDono(Cliente dono) {
+        this.dono = dono;
+    }
 }
+
