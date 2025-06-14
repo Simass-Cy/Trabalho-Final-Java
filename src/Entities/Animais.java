@@ -1,4 +1,49 @@
 package Entities;
 
-public class Animais {
+public class Animais extends Cliente {
+
+    private String nomeAnimal;
+    private Long idAnimal;
+    private String dataNascimentoAnimal;
+    private int idadeAnimal;
+
+    public Animais(String nomeAnimal, Long idAnimal, String dataNascimentoAnimal, int idadeAnimal) {
+        this.nomeAnimal = nomeAnimal;
+        this.idAnimal = idAnimal;
+        this.dataNascimentoAnimal = dataNascimentoAnimal;
+        this.idadeAnimal = idadeAnimal;
+    }
+
+    //get e set
+    public String getNomeAnimal() {
+        return nomeAnimal;
+    }
+
+    public void setNomeAnimal(String nomeAnimal) {
+        this.nomeAnimal = nomeAnimal;
+    }
+
+    public Long getIdAnimal() {
+        return idAnimal;
+    }
+
+    public void setIdAnimal(Long idAnimal) {
+        this.idAnimal = idAnimal;
+    }
+
+    public String getDataNascimentoAnimal() {
+        return dataNascimentoAnimal;
+    }
+
+    public void setDataNascimentoAnimal(String dataNascimentoAnimal) {
+        this.dataNascimentoAnimal = dataNascimentoAnimal;
+    }
+
+    public int getIdadeAnimal() {
+        return idadeAnimal;
+    }
+
+    public void setIdadeAnimal(int idadeAnimal) {
+        this.idadeAnimal = idadeAnimal;
+    }
 }
