@@ -11,6 +11,7 @@ public class Cliente {
     private String email;
     private String telefone;
     private List<Animais> animais = new ArrayList<>();
+    private List<Agendamento> agendamentos = new ArrayList<>();
 
    //no args constructor
     public Cliente() {
@@ -23,6 +24,12 @@ public class Cliente {
         this.senha = senha;
         this.email = email;
         this.telefone = telefone;
+    }
+    //construtor sobrecarregado
+    public Cliente(long id, String nome, int senha, String email, String telefone, List<Animais> animais, List<Agendamento> agendamentos) {
+        this(id, nome, senha, email, telefone);
+        this.animais = animais;
+        this.agendamentos = agendamentos;
     }
 
     //getters e setters
@@ -73,4 +80,12 @@ public class Cliente {
     public void setAnimais(List<Animais> animais) {
         this.animais = animais;
     }
+    public List<Agendamento> getAgendamentos() {
+        return agendamentos;
+    }
+
+    public void setAgendamentos(List<Agendamento> agendamentos) {
+        this.agendamentos = agendamentos;
+    }
+
 }

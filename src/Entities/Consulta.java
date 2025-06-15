@@ -1,6 +1,7 @@
 package Entities;
 
 import java.time.LocalDateTime;
+import Application.Cargo;
 
 public class Consulta {
 
@@ -10,16 +11,16 @@ public class Consulta {
     private Funcionario veterinario;
     private Animais animal;
     private Receita receita;
+    private Agendamento agendamentoOrigem;
 
-    /**
-     * Construtor padrão.
-     */
+    //no args constructor
     public Consulta() {
     }
 
+    // Construtor original
     public Consulta(long id, LocalDateTime dataHora, String descricao, Funcionario veterinario, Animais animal) {
-        // Validação para garantir que o funcionário é um veterinário
-        if (veterinario.getCargo() != Application.Cargo.VETERINARIO) {
+        // verifica se o funcionario eh veterinario
+        if (veterinario.getCargo() != Cargo.VETERINARIO) {
             throw new IllegalArgumentException("O funcionário responsável pela consulta deve ser um VETERINARIO.");
         }
         this.id = id;
@@ -29,7 +30,20 @@ public class Consulta {
         this.animal = animal;
     }
 
-    // --- Getters e Setters ---
+    /**
+     * CONSTRUTOR SOBRECARREGADO
+     * Construtor que também inclui o agendamento de origem.
+     */
+    public Consulta(long id, LocalDateTime dataHora, String descricao, Funcionario veterinario, Animais animal, Agendamento agendamentoOrigem) {
+        // 1. Chama o construtor anterior para inicializar os 5 primeiros campos
+        this(id, dataHora, descricao, veterinario, animal);
+
+        // 2. Inicializa o campo adicional
+        this.agendamentoOrigem = agendamentoOrigem;
+    }
+
+
+    //gets e sets
 
     public long getId() {
         return id;
@@ -60,8 +74,7 @@ public class Consulta {
     }
 
     public void setVeterinario(Funcionario veterinario) {
-        // Validação para garantir que o funcionário é um veterinário
-        if (veterinario.getCargo() != Application.Cargo.VETERINARIO) {
+        if (veterinario.getCargo() != Cargo.VETERINARIO) {
             throw new IllegalArgumentException("O funcionário responsável pela consulta deve ser um VETERINARIO.");
         }
         this.veterinario = veterinario;
@@ -81,5 +94,12 @@ public class Consulta {
 
     public void setReceita(Receita receita) {
         this.receita = receita;
+    }
+    public Agendamento getAgendamentoOrigem() {
+        return agendamentoOrigem;
+    }
+
+    public void setAgendamentoOrigem(Agendamento agendamentoOrigem) {
+        this.agendamentoOrigem = agendamentoOrigem;
     }
 }
