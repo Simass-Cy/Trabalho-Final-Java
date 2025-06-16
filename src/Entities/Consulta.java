@@ -17,7 +17,7 @@ public class Consulta {
     public Consulta() {
     }
 
-    // Construtor original
+    // all args constructor (sem sobrecarregar)
     public Consulta(long id, LocalDateTime dataHora, String descricao, Funcionario veterinario, Animais animal) {
         // verifica se o funcionario eh veterinario
         if (veterinario.getCargo() != Cargo.VETERINARIO) {
@@ -30,15 +30,9 @@ public class Consulta {
         this.animal = animal;
     }
 
-    /**
-     * CONSTRUTOR SOBRECARREGADO
-     * Construtor que também inclui o agendamento de origem.
-     */
+    //construtor sobrecarregado
     public Consulta(long id, LocalDateTime dataHora, String descricao, Funcionario veterinario, Animais animal, Agendamento agendamentoOrigem) {
-        // 1. Chama o construtor anterior para inicializar os 5 primeiros campos
         this(id, dataHora, descricao, veterinario, animal);
-
-        // 2. Inicializa o campo adicional
         this.agendamentoOrigem = agendamentoOrigem;
     }
 

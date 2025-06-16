@@ -3,7 +3,7 @@ package Entities;
 import Application.Cargo;
 
 /*classe abstrata
-* nao quero que ngm crie nada com ela só vai servir pra ser herdada
+* serve como molde para funcionarios especificos
 * */
 public abstract class Funcionario {
     private Long idFuncionario;

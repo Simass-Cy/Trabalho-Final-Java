@@ -4,39 +4,29 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * Representa um relatório específico sobre as consultas realizadas em um período.
- * Herda os campos comuns da classe Relatorio.
- */
+/* herda caracteristicas gerais da classe relatorio, pois podem (futuramente) ser adicionados
+*outros tipos de relatorio
+* */
+
 public class RelatorioConsulta extends Relatorio {
 
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private List<Consulta> consultas;
 
-    /**
-     * Construtor padrão.
-     */
+   //no args constructor
     public RelatorioConsulta() {
-        super(); // Chama o construtor da classe mãe
+        super();
     }
-
-    /**
-     * Construtor completo para criar um relatório de consultas.
-     * @param id O identificador do relatório.
-     * @param autor O funcionário que gerou o relatório.
-     * @param dataInicio A data de início do período do relatório.
-     * @param dataFim A data de fim do período do relatório.
-     * @param consultas A lista de consultas realizadas no período.
-     */
+    // no args constructor
     public RelatorioConsulta(long id, Funcionario autor, LocalDate dataInicio, LocalDate dataFim, List<Consulta> consultas) {
-        super(id, autor); // Chama o construtor da classe mãe para inicializar os dados comuns
+        super(id, autor); //construtor da classe mae para inicializar os dados basicos
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.consultas = consultas;
     }
 
-    // --- Getters e Setters específicos ---
+    // gets e sets
 
     public LocalDate getDataInicio() {
         return dataInicio;

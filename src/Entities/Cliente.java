@@ -10,6 +10,7 @@ public class Cliente {
     private int senha;
     private String email;
     private String telefone;
+    //animais e agendamentos pertencem ao cliente
     private List<Animais> animais = new ArrayList<>();
     private List<Agendamento> agendamentos = new ArrayList<>();
 

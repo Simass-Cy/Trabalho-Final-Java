@@ -10,17 +10,17 @@ public class Agendamento {
     private StatusAgendamento status;
     private Cliente cliente;
     private Animais animal;
-    private Funcionario funcionarioQueAgendou; // Quem marcou a consulta (ex: Recepcionista)
+    private Funcionario funcionarioQueAgendou;
 
-    // Construtor Padrão
+    // no args constructor
     public Agendamento() {
-        // Por padrão, um novo agendamento começa como PENDENTE
+        // novo agendamento começa como PENDENTE
         this.status = StatusAgendamento.PENDENTE;
     }
 
-    // Construtor Completo
+    // all args constructor
     public Agendamento(long id, LocalDateTime dataHora, Cliente cliente, Animais animal, Funcionario funcionarioQueAgendou) {
-        this(); // Chama o construtor padrão para setar o status como PENDENTE
+        this(); // Chama o construtor para setar o status como PENDENTE
         this.id = id;
         this.dataHora = dataHora;
         this.cliente = cliente;
@@ -28,7 +28,7 @@ public class Agendamento {
         this.funcionarioQueAgendou = funcionarioQueAgendou;
     }
 
-    // Getters e Setters
+    //gets e sets
 
     public long getId() {
         return id;

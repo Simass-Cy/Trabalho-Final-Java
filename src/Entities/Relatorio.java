@@ -2,30 +2,25 @@ package Entities;
 
 import java.time.LocalDateTime;
 
-/**
- * Classe base abstrata para todos os tipos de relatórios no sistema.
- * Não pode ser instanciada diretamente.
- */
+//classe molde para relatorios
 public abstract class Relatorio {
 
     private long id;
     private LocalDateTime dataGeracao;
     private Funcionario autor; // Quem gerou o relatório
 
-    /**
-     * Construtor padrão que já define a data e hora de geração do relatório.
-     */
+    //construtor seta data e hora padrao
     public Relatorio() {
         this.dataGeracao = LocalDateTime.now();
     }
 
     public Relatorio(long id, Funcionario autor) {
-        this(); // Chama o construtor padrão para setar a data de geração
+        this(); //chama o construtor que setou data e hora
         this.id = id;
         this.autor = autor;
     }
 
-    // --- Getters e Setters ---
+    // gets e sets
 
     public long getId() {
         return id;
