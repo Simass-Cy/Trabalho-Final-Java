@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaInicialcontroller">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu fx:id="menuagendamento" mnemonicParsing="false" text="Agendamento">
+            <items>
+              <MenuItem fx:id="menuitemagendarconsulta" mnemonicParsing="false" onAction="#abrirCadastroClientes" text="Agendar consultas" />
+                  <MenuItem fx:id="menuitemagendarexame" mnemonicParsing="false" text="Agendar exames" />
+            </items>
+          </Menu>
+          <Menu fx:id="menucadastro" mnemonicParsing="false" text="Cadastro ">
+               <items>
+                  <MenuItem fx:id="menuitemcadastraranimais" mnemonicParsing="false" onAction="#abrirregistroanimais" text="Cadastrar animais" />
+               </items>
+          </Menu>
+            <Menu fx:id="menuanimaiscadastrados" mnemonicParsing="false" text="Animais Cadastrados" />
+          <Menu fx:id="menurelatorios" mnemonicParsing="false" text="Relatorios">
+            <items>
+              <MenuItem fx:id="menuitemrelatoriosdeconsultas" mnemonicParsing="false" text="Relatorio de consultas" />
+            </items>
+          </Menu>
+        </menus>
+         <effect>
+            <Blend mode="BLUE" />
+         </effect>
+      </MenuBar>
+      <AnchorPane fx:id="anchorpane" prefHeight="375.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="400.0" fitWidth="773.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/telainicial.jpg" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+   </children>
+</VBox>

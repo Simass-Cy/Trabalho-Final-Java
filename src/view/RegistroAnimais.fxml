@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegistroAnimaiscontroller">
+   <children>
+      <Label layoutX="200.0" layoutY="30.0" text="Registro animal">
+         <font>
+            <Font name="Arial Black" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="121.0" layoutY="136.0" text="Nome:">
+         <font>
+            <Font name="Cambria" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="121.0" layoutY="183.0" text="Nome dono:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="121.0" layoutY="235.0" text="Data Nasc:">
+         <font>
+            <Font name="Cambria" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="121.0" layoutY="273.0" text="Idade:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nomedonoregistroanimal" layoutX="233.0" layoutY="188.0" />
+      <TextField fx:id="nomeregistroanimal" layoutX="233.0" layoutY="135.0" />
+      <TextField fx:id="datanascanimal" layoutX="233.0" layoutY="234.0" />
+      <TextField fx:id="idadeanimal" layoutX="233.0" layoutY="274.0" />
+      <Button cache="true" defaultButton="true" layoutX="316.0" layoutY="334.0" mnemonicParsing="false" text="Salvar Registro">
+         <font>
+            <Font name="Cambria" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="botaolimpar" defaultButton="true" layoutX="207.0" layoutY="334.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
+   </children>
+</Pane>
