@@ -5,42 +5,42 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegistroAnimaiscontroller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Registroanimais.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegistroAnimaiscontroller">
    <children>
-      <Label layoutX="200.0" layoutY="30.0" text="Registro animal">
+      <Label layoutX="232.0" layoutY="14.0" text="Registro animal">
          <font>
             <Font name="Arial Black" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="136.0" text="Nome:">
+      <Label layoutX="114.0" layoutY="76.0" text="Nome:">
          <font>
             <Font name="Cambria" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="183.0" text="Nome dono:">
+      <Label layoutX="115.0" layoutY="133.0" text="Nome dono:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="235.0" text="Data Nasc:">
+      <Label layoutX="114.0" layoutY="207.0" text="Data Nasc:">
          <font>
             <Font name="Cambria" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="121.0" layoutY="273.0" text="Idade:">
+      <Label layoutX="116.0" layoutY="274.0" text="Idade:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="nomedonoregistroanimal" layoutX="233.0" layoutY="188.0" />
-      <TextField fx:id="nomeregistroanimal" layoutX="233.0" layoutY="135.0" />
-      <TextField fx:id="datanascanimal" layoutX="233.0" layoutY="234.0" />
-      <TextField fx:id="idadeanimal" layoutX="233.0" layoutY="274.0" />
-      <Button cache="true" defaultButton="true" layoutX="316.0" layoutY="334.0" mnemonicParsing="false" text="Salvar Registro">
+      <TextField fx:id="nomedonoregistroanimal" layoutX="233.0" layoutY="126.0" />
+      <TextField fx:id="nomeregistroanimal" layoutX="233.0" layoutY="69.0" />
+      <TextField fx:id="idadeanimal" layoutX="233.0" layoutY="267.0" />
+      <Button cache="true" defaultButton="true" layoutX="350.0" layoutY="398.0" mnemonicParsing="false" text="Salvar Registro">
          <font>
             <Font name="Cambria" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="botaolimpar" defaultButton="true" layoutX="207.0" layoutY="334.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
+      <Button fx:id="botaolimpar" defaultButton="true" layoutX="172.0" layoutY="398.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
+      <DatePicker layoutX="233.0" layoutY="200.0" />
    </children>
 </Pane>

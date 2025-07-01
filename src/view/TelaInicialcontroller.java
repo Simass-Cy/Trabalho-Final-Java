@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import Entities.Agendamento;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -15,32 +14,26 @@ import java.io.IOException;
 public class TelaInicialcontroller {
 
     @FXML
-    private Menu menuagendamento;
+    private Button menuagendamento;
     @FXML
-    private Menu menucadastro;
+    private Button menucadastro;
     @FXML
-    private Menu menuanimaiscadastrados;
+    private Button menuanimaiscadastrados;
     @FXML
-    private Menu menurelatorios;
+    private Button menurelatorios;
 
 
-    @FXML
-    private MenuItem menuitemagendarconsulta;
-    @FXML
-    private MenuItem menuitemagendarexame;
-    @FXML
-    private MenuItem menuitemcadastraranimais;
-    @FXML
-    private MenuItem menuitemrelatoriosdeconsultas;
+
 
     @FXML
     private AnchorPane anchorpane;
 
     @FXML
 
-    private void abrirCadastroClientes() {
+    private void abrirRegistroConsultas() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("TelaAgendamento.fxml"));
+
             Parent root = loader.load();
 
             Stage stage = new Stage(); // nova janela
@@ -53,15 +46,34 @@ public class TelaInicialcontroller {
         }
     }
         @FXML
-    private void abrirregistroanimais() {
+    private void abrircadastroanimais() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RegistroAnimais.fxml"));
             Parent root = loader.load();
 
             Stage stage1 = new Stage(); // nova janela
+            stage1.setTitle("Registro Animais");
 
             stage1.setScene(new Scene(root));
             stage1.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @FXML
+
+    private void abrirAnimaiscadastrados() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AnimaisCadastrados.fxml"));
+            Parent root = loader.load();
+
+            Stage stage2 = new Stage(); // nova janela
+            stage2.setTitle("Animais Cadastrados ");
+
+            stage2.setScene(new Scene(root));
+            stage2.show();
 
         } catch (IOException e) {
             e.printStackTrace();

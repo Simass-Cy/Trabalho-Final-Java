@@ -2,9 +2,7 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import Entities.Agendamento;
 
 public class Agendamentocontroller {
     @FXML private ComboBox<String> combopet;
@@ -19,7 +17,7 @@ public class Agendamentocontroller {
 
     @FXML
     private void initialize(){
-        combopet.getItems().addAll("Cachorro","gato");
+        combopet.getItems().addAll("Cachorro","Gato","Outro");
     }
 
     @FXML

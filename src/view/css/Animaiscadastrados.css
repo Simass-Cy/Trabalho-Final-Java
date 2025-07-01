@@ -1,0 +1,110 @@
+/* Estilo geral da tela */
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-base: #ffffff;
+    -fx-background-color: #f0f2f5;
+}
+
+/* Estilo do BorderPane principal */
+.border-pane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 15px;
+    -fx-border-color: #dfe3e6;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+/* Estilo do título */
+.label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 2, 0.0, 0, 1);
+}
+
+/* Estilo do TabPane */
+.tab-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dfe3e6;
+    -fx-border-width: 1px;
+}
+
+/* Estilo das abas */
+.tab {
+    -fx-background-color: #e9ecef;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-padding: 8px 15px;
+}
+
+.tab:selected {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+.tab-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.tab:selected .tab-label {
+    -fx-text-fill: white;
+}
+
+/* Estilo do conteúdo das abas */
+.tab-content-area {
+    -fx-background-color: #ffffff;
+    -fx-padding: 15px;
+    -fx-border-color: #dfe3e6;
+    -fx-border-width: 0 1px 1px 1px;
+}
+
+/* Estilo dos botões */
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);
+    -fx-cursor: hand;
+    -fx-min-width: 100px;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+    -fx-translate-y: -2px;
+}
+
+.button:pressed {
+    -fx-background-color: #1a5276;
+    -fx-translate-y: 0;
+}
+
+/* Botão Editar */
+#botaoeditar {
+    -fx-background-color: #f0ad4e; /* Laranja */
+}
+
+#botaoeditar:hover {
+    -fx-background-color: #eea236; /* Laranja mais escuro */
+}
+
+/* Botão Excluir */
+#botaoexcluir {
+    -fx-background-color: #d9534f; /* Vermelho */
+}
+
+#botaoexcluir:hover {
+    -fx-background-color: #c9302c; /* Vermelho mais escuro */
+}
+
+/* Estilo do painel inferior */
+.pane {
+    -fx-background-color: #f8f9fa;
+    -fx-padding: 15px;
+    -fx-border-color: #dfe3e6;
+    -fx-border-width: 1px 0 0 0;
+}

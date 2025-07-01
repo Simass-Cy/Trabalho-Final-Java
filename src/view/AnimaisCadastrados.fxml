@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="Telaanimaiscadastrados" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/AnimaisCadastrados.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Animaiscadastradoscontroller">
+    <top>
+        <Label fx:id="titulo" text="Animais Cadastrados" BorderPane.alignment="CENTER" />
+    </top>
+    <center>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab fx:id="colunanomeanimal" text="Nome animal">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-content-area" />
+                    </content>
+                </Tab>
+                <Tab fx:id="colunaid" text="ID">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-content-area" />
+                    </content>
+                </Tab>
+                <Tab fx:id="colunatutor" text="Tutor">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-content-area" />
+                    </content>
+                </Tab>
+                <Tab fx:id="colunadatanascimento" text="Data nascimento">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-content-area" />
+                    </content>
+                </Tab>
+                <Tab fx:id="colunaidade" text="Idade">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-content-area" />
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+    <bottom>
+        <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="botaoeditar" layoutX="218.0" layoutY="60.0" mnemonicParsing="false" text="Editar" />
+                <Button fx:id="botaoexcluir" layoutX="417.0" layoutY="60.0" mnemonicParsing="false" text="Excluir" />
+            </children>
+        </Pane>
+    </bottom>
+</BorderPane>
