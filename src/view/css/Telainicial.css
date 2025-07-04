@@ -1,0 +1,87 @@
+/* Telainicial.css - Estilo Atualizado */
+
+/* Estilo geral da aplicação */
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-base: #ffffff; /* Alterado para branco */
+}
+
+/* Estilo do SplitPane */
+.split-pane {
+    -fx-background-color: #f0f2f5; /* Alterado para cinza claro */
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+
+/* Estilo dos AnchorPanes */
+.anchor-pane {
+    -fx-background-color: #ffffff; /* Alterado para branco */
+}
+
+/* Estilo dos botões do menu */
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+    -fx-cursor: hand;
+    -fx-min-width: 150px;
+    -fx-alignment: center-left;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+    -fx-translate-y: -2px;
+}
+
+.button:pressed {
+    -fx-background-color: #1a5276;
+    -fx-translate-y: 0;
+}
+
+/* Estilo do título */
+.label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f39c12;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.5), 2, 0.0, 0, 1);
+    -fx-padding: 0 0 10px 0;
+}
+
+/* Estilo das imagens */
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 1);
+}
+
+/* Efeito hover para imagens */
+.image-view:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-cursor: hand;
+}
+
+/* Estilo do painel direito */
+.anchor-pane:last-child {
+    -fx-background-color: #f8f9fa; /* Alterado para cinza muito claro */
+    -fx-border-color: #dfe3e6; /* Borda mais clara */
+    -fx-border-width: 0 0 0 1px;
+}
+
+/* Espaçamento entre botões */
+.button {
+    -fx-margin: 5px 0;
+}
+#imagemcapa {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 4, 4);
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: #8e44ad; /* Roxo elegante */
+    -fx-border-width: 3px;
+    -fx-padding: 5px;
+    -fx-cursor: hand;
+}
+
