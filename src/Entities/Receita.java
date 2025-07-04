@@ -1,43 +1,36 @@
 package Entities;
 
+
 public class Receita {
 
-    private long idReceita;
-    private String descricaoReceita;
-    private Cliente ClienteReceita;
+    private long id; // Renomeado para seguir o padrão
+    private String descricao;
 
-    //no args constructor
+    // no args constructor
     public Receita() {
     }
 
-    //all args constructor
-    public Receita(long idReceita, String descricaoReceita, Cliente clienteReceita) {
-        this.idReceita = idReceita;
-        this.descricaoReceita = descricaoReceita;
-        ClienteReceita = clienteReceita;
+    // all args constructor
+    public Receita(long id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;
     }
 
-    public long getIdReceita() {
-        return idReceita;
+    // --- Getters e Setters ---
+
+    public long getId() {
+        return id;
     }
 
-    public void setIdReceita(long idReceita) {
-        this.idReceita = idReceita;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getDescricaoReceita() {
-        return descricaoReceita;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricaoReceita(String descricaoReceita) {
-        this.descricaoReceita = descricaoReceita;
-    }
-
-    public Cliente getClienteReceita() {
-        return ClienteReceita;
-    }
-
-    public void setClienteReceita(Cliente clienteReceita) {
-        ClienteReceita = clienteReceita;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

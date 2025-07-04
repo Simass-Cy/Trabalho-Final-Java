@@ -3,6 +3,8 @@ package Entities;
 import Application.TipoDeProduto;
 
 public class Produto {
+
+    private Long idProduto;
     private String nomeProduto;
     private String descricaoProduto;
     private float precoProduto;
@@ -20,7 +22,25 @@ public class Produto {
         Categoria = categoria;
     }
 
+    //Sobrecarga de construtor adicionado idProduto
+
+
+    public Produto(Long idProduto, String nomeProduto, String descricaoProduto, float precoProduto, TipoDeProduto categoria) {
+        this(nomeProduto,descricaoProduto,precoProduto,categoria);
+        this.idProduto = idProduto;
+
+    }
+
     //gets e sets
+
+    public Long getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(Long idProduto) {
+        this.idProduto = idProduto;
+    }
+
     public String getNomeProduto() {
         return nomeProduto;
     }

@@ -12,8 +12,6 @@ public interface IClienteRepository {
     //listas para retornar informacoes que tem mais de uma correspondecia
     List<Cliente> buscarPorNome(String nome);
 
-    List<Animais> buscarPeloNomeDoAnimal(String nomeAnimal);
-
     List<Cliente> buscarTodos();
 
     void deletar(long id);

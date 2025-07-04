@@ -7,7 +7,7 @@ public class Cliente {
 
     private long id;
     private String nome;
-    private int senha;
+    private String senha;
     private String email;
     private String telefone;
     //animais e agendamentos pertencem ao cliente
@@ -19,7 +19,7 @@ public class Cliente {
     }
 
     //all args constructor
-    public Cliente(long id, String nome, int senha, String email, String telefone) {
+    public Cliente(long id, String nome, String senha, String email, String telefone) {
         this.id = id;
         this.nome = nome;
         this.senha = senha;
@@ -27,7 +27,7 @@ public class Cliente {
         this.telefone = telefone;
     }
     //construtor sobrecarregado
-    public Cliente(long id, String nome, int senha, String email, String telefone, List<Animais> animais, List<Agendamento> agendamentos) {
+    public Cliente(long id, String nome, String senha, String email, String telefone, List<Animais> animais, List<Agendamento> agendamentos) {
         this(id, nome, senha, email, telefone);
         this.animais = animais;
         this.agendamentos = agendamentos;
@@ -50,11 +50,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public int getSenha() {
+    public String getSenha() {
         return senha;
     }
 
-    public void setSenha(int senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
 

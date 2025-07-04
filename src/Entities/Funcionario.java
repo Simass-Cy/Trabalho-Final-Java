@@ -35,6 +35,16 @@ public abstract class Funcionario {
     }
 
     //get e set
+
+
+    public String getSenhaFuncionario() {
+        return senhaFuncionario;
+    }
+
+    public void setSenhaFuncionario(String senhaFuncionario) {
+        this.senhaFuncionario = senhaFuncionario;
+    }
+
     public Long getIdFuncionario() {
         return idFuncionario;
     }

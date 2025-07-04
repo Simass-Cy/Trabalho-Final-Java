@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /* herda caracteristicas gerais da classe relatorio, pois podem (futuramente) ser adicionados
-*outros tipos de relatorio
+*outros tipos de relatorio, por exemplo o relatorio financeiro.
 * */
 
 public class RelatorioConsulta extends Relatorio {
