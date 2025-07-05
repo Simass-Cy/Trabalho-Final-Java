@@ -2,22 +2,23 @@ package Repositories;
 import Entities.Animais;
 import Entities.Cliente;
 import java.util.List;
+import Exceptions.RepositoryException;
 
     //interface dos metodos do cliente (talvez sejam adicionados novos metodos)
 public interface IClienteRepository {
 
-    void salvar(Cliente cliente);
+        void salvarCliente(Cliente cliente) throws RepositoryException;
 
-    Cliente buscarPorId(long id);
-    //listas para retornar informacoes que tem mais de uma correspondecia
-    List<Cliente> buscarPorNome(String nome);
+        Cliente buscarPorIdCliente(long id) throws RepositoryException;
 
-    List<Cliente> buscarTodos();
+        List<Cliente> buscarPorNomeCliente(String nome) throws RepositoryException;
 
-    void deletar(long id);
+        List<Cliente> buscarTodosCliente() throws RepositoryException;
 
-    void adicionarAnimalAoCliente(Cliente cliente, Animais animal);
+        void deletarCliente(long id) throws RepositoryException;
 
-        List<Cliente> buscarPorEmail(String email);
+        void adicionarAnimalAoCliente(Cliente cliente, Animais animal) throws RepositoryException;
+
+        List<Cliente> buscarPorEmailCliente(String email) throws RepositoryException;
 }
 
