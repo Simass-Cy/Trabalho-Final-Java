@@ -1,9 +1,9 @@
 package Main;
 
-import Application.TipoDeProduto;
 import Entities.*;
+import Exceptions.ServiceException;
 import Service.*;
-import Repositories.*;
+import Application.TipoDeProduto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,73 +14,64 @@ public class Main {
         System.out.println("--- INICIANDO TESTE COMPLETO DA CAMADA DE SERVIÇO ---");
         System.out.println("--- INICIANDO TESTE COMPLETO E AUTOMATIZADO ---");
 
-        // 1. Instanciando todos os serviços
         ClienteService clienteService = new ClienteService();
         FuncionarioService funcionarioService = new FuncionarioService();
         AnimalService animalService = new AnimalService();
         ProdutoService produtoService = new ProdutoService();
         AgendamentoService agendamentoService = new AgendamentoService();
         ConsultaService consultaService = new ConsultaService();
-        RelatorioService relatorioService = new RelatorioService();
-        IReceitaRepository receitaRepo = new ReceitaRepositoryDB(); // Necessário para a limpeza
-
-        // Variáveis para guardar os objetos criados e facilitar a limpeza
-        Cliente cliente = null;
-        Veterinario veterinario = null;
-        Produto produto = null;
-        Consulta consulta = null;
-        Agendamento agendamento = null;
-        Receita receita = null;
 
         try {
-            // --- ETAPA DE CRIAÇÃO ---
-            System.out.println("\n>> ETAPA 1: Cadastrando dados de base...");
-            cliente = clienteService.cadastrarNovoCliente("Laura Mendes", "laura.m@teste.com", "laura123", "1111-2222");
-            veterinario = (Veterinario) funcionarioService.contratarNovoFuncionario(
-                    new Veterinario(null, "Dr. Ricardo", "ricardo.vet@teste.com", "3333-4444", "ricardo123", "CRMV-RJ-123")
-            );
-            produto = produtoService.cadastrarNovoProduto("Brinquedo de Corda", "Brinquedo para cães de porte médio.", 35.50f, TipoDeProduto.BRINQUEDO);
-            System.out.println("-> Cliente, Veterinário e Produto cadastrados com sucesso.");
+            // --- ETAPA 1: ADICIONANDO NOVOS REGISTROS ---
+            System.out.println("\n>> ETAPA 1: Cadastrando novos Cliente, Veterinário, Animal e Produto...");
 
-            System.out.println("\n>> ETAPA 2: Adicionando animal e agendando consulta...");
-            Animais toto = animalService.cadastrarNovoAnimal(cliente.getId(), "Totó", LocalDate.now().minusYears(3));
+            // Adiciona um novo Cliente
+            Cliente carlaLopes = clienteService.cadastrarNovoCliente("Carla Lopes", "carla.l@teste.com", "senha789", "4444-5555");
+            System.out.println("-> SUCESSO: Cliente '" + carlaLopes.getNome() + "' (ID: " + carlaLopes.getId() + ") foi criado.");
 
-            agendamento = agendamentoService.agendarNovaConsulta(cliente.getId(), toto.getIdAnimal(), veterinario.getIdFuncionario(), LocalDateTime.now().plusDays(1));
+            // Adiciona um novo Veterinário
+            Veterinario drGabriel = new Veterinario(null, "Dr. Gabriel", "gabriel.vet@teste.com", "6666-7777", "vetGabriel", "CRMV-SC-54321");
+            funcionarioService.contratarNovoFuncionario(drGabriel);
+            System.out.println("-> SUCESSO: Veterinário '" + drGabriel.getNomeFuncionario() + "' (ID: " + drGabriel.getIdFuncionario() + ") foi criado.");
 
+            // Adiciona um novo Animal para a Carla
+            Animais felix = animalService.cadastrarNovoAnimal(carlaLopes.getId(), "Félix", LocalDate.now().minusYears(5));
+            System.out.println("-> SUCESSO: Animal '" + felix.getNomeAnimal() + "' (ID: " + felix.getIdAnimal() + ") foi criado para a cliente '" + carlaLopes.getNome() + "'.");
 
-            // --- ETAPA DE TESTE DAS OPERAÇÕES ---
-            System.out.println("\n>> ETAPA 3: Testando a realização da consulta...");
-            String descConsulta = "Check-up de rotina.";
-            String descReceita = "Nenhum medicamento necessário, apenas continuar com a alimentação atual.";
-            consulta = consultaService.realizarConsulta(agendamento.getId(), descConsulta, descReceita);
-            receita = consulta.getReceita(); // Pega a receita que foi criada dentro do serviço
-            System.out.println("-> Consulta realizada e registrada com sucesso!");
-
-            // --- ETAPA DE VERIFICAÇÃO ---
-            System.out.println("\n>> ETAPA 4: Verificando e gerando relatório...");
-            RelatorioConsulta relatorio = relatorioService.gerarESalvarRelatorioDeConsultas(veterinario.getIdFuncionario(), LocalDate.now(), LocalDate.now().plusDays(2));
-            System.out.println("-> Relatório ID " + relatorio.getId() + " gerado e salvo.");
-            System.out.println("   Contém " + relatorio.getConsultas().size() + " consulta(s).");
+            // Adiciona um novo Produto
+            Produto vitamina = produtoService.cadastrarNovoProduto("Vitamina para Pelos", "Suplemento vitamínico para fortalecimento de pelos.", 75.20f, TipoDeProduto.MEDICAMENTO);
+            System.out.println("-> SUCESSO: Produto '" + vitamina.getNomeProduto() + "' (ID: " + vitamina.getIdProduto() + ") foi criado.");
 
 
-        } catch (Exception e) {
-            System.err.println("\n!!! OCORREU UM ERRO DURANTE O TESTE !!!");
+            // --- ETAPA 2: REALIZANDO O FLUXO DE CONSULTA ---
+            System.out.println("\n>> ETAPA 2: Realizando o fluxo completo de consulta...");
+
+            // Agenda a consulta
+            Agendamento agendamentoFelix = agendamentoService.agendarNovaConsulta(carlaLopes.getId(), felix.getIdAnimal(), drGabriel.getIdFuncionario(), LocalDateTime.now().plusHours(2));
+            System.out.println("-> SUCESSO: Agendamento para '" + felix.getNomeAnimal() + "' foi criado.");
+
+            // Realiza a consulta e cria uma receita
+            String descConsulta = "Animal apresentando queda de pelos excessiva.";
+            String descReceita = "Administrar suplemento vitamínico 'Vitamina para Pelos' uma vez ao dia.";
+            Consulta consultaFelix = consultaService.realizarConsulta(agendamentoFelix.getId(), descConsulta, descReceita);
+            System.out.println("-> SUCESSO: Consulta realizada e registrada com ID: " + consultaFelix.getId() + ". Receita associada com ID: " + consultaFelix.getReceita().getId());
+
+
+            // --- ETAPA 3: VERIFICAÇÃO FINAL ---
+            System.out.println("\n>> ETAPA 3: Verificando alguns dos dados recém-criados...");
+
+            List<Animais> animaisDaCarla = animalService.listarAnimaisPorDono(carlaLopes.getId());
+            System.out.println("-> Verificação: A cliente '" + carlaLopes.getNome() + "' possui " + animaisDaCarla.size() + " animal(is) cadastrado(s).");
+
+            Produto produtoBuscado = produtoService.encontrarProdutoPorId(vitamina.getIdProduto());
+            System.out.println("-> Verificação: O produto buscado por ID é '" + produtoBuscado.getNomeProduto() + "'.");
+
+
+        } catch (ServiceException e) {
+            System.err.println("\n!!! OCORREU UM ERRO INESPERADO DURANTE O TESTE !!!");
             e.printStackTrace();
-        } finally {
-            // --- ETAPA DE LIMPEZA (TEARDOWN) ---
-            // Deleta todos os registros criados neste teste para que ele possa ser rodado novamente.
-            System.out.println("\n--- INICIANDO LIMPEZA DOS DADOS DE TESTE ---");
-            try {
-                if (consulta != null) consulta.getVeterinario(); // Supondo que você precise de um método para deletar
-                if (receita != null) receitaRepo.deletarReceita(receita.getId());
-                if (agendamento != null) agendamentoService.deletarAgendamento(agendamento.getId());
-                if (cliente != null) clienteService.deletarCliente(cliente.getId());
-                if (veterinario != null) funcionarioService.deletarFuncionario(veterinario.getIdFuncionario());
-                if (produto != null) produtoService.deletarProduto(produto.getIdProduto());
-                System.out.println("-> Limpeza do banco de dados concluída.");
-            } catch (Exception e) {
-                System.err.println("ERRO DURANTE A LIMPEZA: " + e.getMessage());
-            }
         }
+
+        System.out.println("\n--- TESTE FINALIZADO. OS DADOS PERMANECEM NO BANCO DE DADOS. ---");
     }
 }
