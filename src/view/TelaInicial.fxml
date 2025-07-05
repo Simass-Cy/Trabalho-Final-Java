@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.4952561669829222" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Telainicial.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaInicialcontroller">  <!-- LINHA ADICIONADA -->
+<SplitPane dividerPositions="0.4952561669829222" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Telainicial.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TelaInicialcontroller">  <!-- LINHA ADICIONADA -->
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="505.0" prefWidth="238.0">
             <children>
@@ -44,7 +45,7 @@
                </image>
             </ImageView>
             <Label layoutX="70.0" layoutY="14.0" text="VETERINARIA" />
-            <Button fx:id="menuconsultasagendadas" layoutX="64.0" layoutY="280.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="211.0" text="Consultas agendadas" />
+            <Button fx:id="menuconsultasagendadas" layoutX="64.0" layoutY="280.0" mnemonicParsing="false" onAction="#abrirconsultasagendadas" prefHeight="40.0" prefWidth="211.0" text="Consultas agendadas" />
             <Button fx:id="menufuncionarios" layoutX="60.0" layoutY="349.0" mnemonicParsing="false" text="Funcionarios" />
             <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="12.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -1,0 +1,100 @@
+/* Estilo geral da tela */
+.root {
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+    -fx-base: #ffffff;
+    -fx-background-color: #f0f2f5;
+}
+
+/* Estilo do AnchorPane principal */
+.anchor-pane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 15px;
+    -fx-border-color: #dfe3e6;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+/* Estilo do título */
+.label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 10px 0 20px 0;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 2, 0.0, 0, 1);
+}
+
+/* Estilo da TableView */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dfe3e6;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+}
+
+/* Cabeçalho da tabela */
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px;
+    -fx-effect: none;
+}
+
+/* Linhas da tabela */
+.table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dfe3e6;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f8f9fa;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #d4e6f1;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Células da tabela */
+.table-cell {
+    -fx-padding: 8px;
+    -fx-border-color: transparent;
+    -fx-font-size: 13px;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Barra de rolagem */
+.scroll-bar:horizontal,
+.scroll-bar:vertical {
+    -fx-background-color: #f8f9fa;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #3498db;
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #2980b9;
+}
+
+/* Botões na barra de rolagem */
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 5px;
+}
+
+/* Efeito hover nas linhas */
+.table-row-cell:hover {
+    -fx-background-color: #e9f5fb;
+}

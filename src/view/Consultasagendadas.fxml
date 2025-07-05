@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Consultasagendadas.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ConsultasAgendadasController">
+   <children>
+      <Label layoutX="284.0" text="Consultas agendadas" />
+      <TableView fx:id="tabelaconsultasagendadas" layoutX="-3.0" layoutY="50.0" prefHeight="540.0" prefWidth="810.0">
+        <columns>
+          <TableColumn fx:id="colunanomeanimal" prefWidth="75.0" text="Nome" />
+            <TableColumn fx:id="colunatipoanimal" prefWidth="75.0" text="Animal" />
+            <TableColumn fx:id="colunanometutor" prefWidth="75.0" text="Tutor" />
+            <TableColumn fx:id="colunahorarioconsulta" prefWidth="75.0" text="Hora" />
+            <TableColumn fx:id="colunadataconsulta" prefWidth="75.0" text="Data" />
+            <TableColumn fx:id="colunacpfresponsavel" prefWidth="75.0" text="CpfTutor" />
+          <TableColumn fx:id="colunadescriçaodaconsulta" prefWidth="149.0" text="Descriçao" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
