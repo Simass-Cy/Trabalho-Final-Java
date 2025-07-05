@@ -17,5 +17,7 @@ public interface IClienteRepository {
     void deletar(long id);
 
     void adicionarAnimalAoCliente(Cliente cliente, Animais animal);
+
+        List<Cliente> buscarPorEmail(String email);
 }
 

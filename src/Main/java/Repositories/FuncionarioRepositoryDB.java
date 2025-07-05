@@ -160,4 +160,23 @@ public class FuncionarioRepositoryDB implements IFuncionarioRepository {
 
         return funcionario;
     }
+
+    @Override
+    public List<Funcionario> buscarPorEmail(String email) {
+        String sql = "SELECT * FROM funcionario WHERE email = ?";
+        List<Funcionario> funcionarios = new ArrayList<>();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    funcionarios.add(mapearParaFuncionario(rs));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return funcionarios;
+    }
+
+
 }

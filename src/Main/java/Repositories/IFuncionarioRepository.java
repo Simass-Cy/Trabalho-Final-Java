@@ -17,4 +17,7 @@ public interface IFuncionarioRepository {
     List<Funcionario> buscarPorNome(String nomeFuncionario);
 
     void deletar(long id);
+
+    List<Funcionario> buscarPorEmail(String email);
+
 }

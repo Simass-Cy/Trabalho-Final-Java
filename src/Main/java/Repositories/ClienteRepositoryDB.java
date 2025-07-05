@@ -136,4 +136,31 @@ public class ClienteRepositoryDB implements IClienteRepository {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public List<Cliente> buscarPorEmail(String email) {
+        String sql = "SELECT * FROM cliente WHERE email = ?";
+        List<Cliente> clientes = new ArrayList<>();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    clientes.add(new Cliente(
+                            rs.getLong("id"),
+                            rs.getString("nome"),
+                            rs.getString("senha"),
+                            rs.getString("email"),
+                            rs.getString("telefone")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clientes;
+    }
+
+
 }
