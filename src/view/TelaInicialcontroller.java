@@ -80,4 +80,21 @@ public class TelaInicialcontroller {
         }
 
     }
+    @FXML
+    private void abrirconsultasagendadas() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Consultasagendadas.fxml"));
+            Parent root = loader.load();
+
+            Stage stage3 = new Stage(); // nova janela
+            stage3.setTitle("LISTA CONSULTA AGENDADAS ");
+
+            stage3.setScene(new Scene(root));
+            stage3.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

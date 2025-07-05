@@ -2,6 +2,7 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class Agendamentocontroller {
@@ -12,7 +13,7 @@ public class Agendamentocontroller {
     @FXML private TextField nometutor;
     @FXML private TextField rgtutor;
     @FXML private TextField telefonetutor;
-    @FXML private TextField dataconsulta;
+    @FXML private DatePicker dataconsulta;
     @FXML private TextField horarioconsulta;
 
     @FXML
@@ -26,7 +27,7 @@ public class Agendamentocontroller {
         nometutor.setText(null);
         rgtutor.setText(null);
         telefonetutor.setText(null);
-        dataconsulta.setText(null);
+        dataconsulta.setValue(null);
         horarioconsulta.setText(null);
     }
 
