@@ -6,17 +6,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementação da interface IProdutoRepository que utiliza JDBC.
+ * Esta versão foi corrigida para gerenciar corretamente a conexão Singleton.
+ */
 public class ProdutoRepositoryDB implements IProdutoRepository {
 
-    private Produto mapearParaProduto(ResultSet rs) throws SQLException {
-        return new Produto(
-                rs.getLong("id"),
-                rs.getString("nome"),
-                rs.getString("descricao"),
-                rs.getFloat("preco"),
-                TipoDeProduto.valueOf(rs.getString("categoria"))
-        );
-    }
+    // 1. A conexão agora é um atributo da classe, obtida uma única vez.
+    private final Connection conn = ConnectionFactory.getConnection();
 
     @Override
     public void salvarProduto(Produto produto) {
@@ -27,9 +24,8 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
             sql = "UPDATE produto SET nome = ?, descricao = ?, preco = ?, categoria = ? WHERE id = ?";
         }
 
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
+        // 2. O try-with-resources agora gerencia APENAS o PreparedStatement.
+        try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, produto.getNomeProduto());
             stmt.setString(2, produto.getDescricaoProduto());
             stmt.setFloat(3, produto.getPrecoProduto());
@@ -49,16 +45,14 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Tratamento de erro
+            e.printStackTrace();
         }
     }
 
     @Override
     public Produto buscarPorIdDoProduto(long id) {
         String sql = "SELECT * FROM produto WHERE id = ?";
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -75,9 +69,7 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
     public List<Produto> buscarPorNomeDoProduto(String nome) {
         String sql = "SELECT * FROM produto WHERE nome LIKE ?";
         List<Produto> produtos = new ArrayList<>();
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, "%" + nome + "%");
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -94,9 +86,7 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
     public List<Produto> buscarPorTipoDeProduto(TipoDeProduto tipo) {
         String sql = "SELECT * FROM produto WHERE categoria = ?";
         List<Produto> produtos = new ArrayList<>();
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, tipo.toString());
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -113,10 +103,8 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
     public List<Produto> buscarTodosOsProduto() {
         String sql = "SELECT * FROM produto";
         List<Produto> produtos = new ArrayList<>();
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
-
             while (rs.next()) {
                 produtos.add(mapearParaProduto(rs));
             }
@@ -129,15 +117,21 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
     @Override
     public void deletarProduto(long id) {
         String sql = "DELETE FROM produto WHERE id = ?";
-        try (Connection conn = ConnectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, id);
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    private Produto mapearParaProduto(ResultSet rs) throws SQLException {
+        return new Produto(
+                rs.getLong("id"),
+                rs.getString("nome"),
+                rs.getString("descricao"),
+                rs.getFloat("preco"),
+                TipoDeProduto.valueOf(rs.getString("categoria"))
+        );
+    }
 }

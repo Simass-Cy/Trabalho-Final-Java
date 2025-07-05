@@ -11,7 +11,7 @@ public class ConnectionFactory {
     // --- Dados de conexão (substitua com os seus quando criar o banco) ---
     private static final String URL = "jdbc:mysql://localhost:3306/clinica_vet_db";
     private static final String USER = "root"; // ou o seu usuário do MySQL
-    private static final String PASSWORD = "sua_senha"; // a senha do seu usuário do MySQL
+    private static final String PASSWORD = "A6gsa598fejw82"; // a senha do seu usuário do MySQL
 
     // 2. O construtor é PRIVADO.
     // Isso impede que qualquer outra classe crie uma instância com 'new ConnectionFactory()'.
