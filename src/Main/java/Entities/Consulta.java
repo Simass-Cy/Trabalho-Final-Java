@@ -14,7 +14,8 @@ public class Consulta {
     private Agendamento agendamentoOrigem;
 
     //no args constructor
-    public Consulta(String rex, String cachorro, String joão, String time, String date, String s, String consultaDeRotina) {
+    //NO ARGS CONSTRUCTOR NÃO MEXER
+    public Consulta() {
     }
 
     // all args constructor (sem sobrecarregar)
