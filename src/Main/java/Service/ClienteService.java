@@ -53,7 +53,7 @@ public class ClienteService {
             }
 
             Animais novoAnimal = new Animais(null, nomeAnimal, dataNascimento, dono);
-            animalRepository.salvar(novoAnimal);
+            animalRepository.salvarAnimal(novoAnimal);
             return novoAnimal;
         } catch (RepositoryException e) {
             throw new ServiceException("Erro ao comunicar com o banco de dados ao adicionar o animal.", e);
@@ -78,6 +78,26 @@ public class ClienteService {
         }
     }
 
+    public void deletarCliente(long id) throws ServiceException {
+        try {
+            // Regra de Negócio: Verificar se o cliente realmente existe antes de tentar deletar.
+            Cliente clienteExistente = clienteRepository.buscarPorIdCliente(id);
+            if (clienteExistente == null) {
+                throw new ServiceException("Cliente com ID " + id + " não encontrado. Nada a ser deletado.");
+            }
+
+            // Tenta deletar. O banco de dados irá impedir a deleção se houver
+            // chaves estrangeiras apontando para este cliente (ex: na tabela agendamento).
+            // Nosso bloco catch irá tratar esse erro.
+            clienteRepository.deletarCliente(id);
+
+            System.out.println("SERVICE: Cliente '" + clienteExistente.getNome() + "' deletado com sucesso.");
+
+        } catch (RepositoryException e) {
+            // "Traduz" o erro técnico do repositório para um erro de negócio mais claro.
+            throw new ServiceException("Erro ao deletar o cliente. Verifique se ele não possui agendamentos ou consultas pendentes.", e);
+        }
+    }
 
     private boolean isEmailValido(String email) {
         if (email == null) return false;

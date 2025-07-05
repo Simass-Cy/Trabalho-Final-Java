@@ -1,10 +1,10 @@
 package Repositories;
 
 import Entities.RelatorioConsulta;
-import java.util.List;
+import Exceptions.RepositoryException;
 
 public interface IRelatorioRepository {
 
-    void salvarRelatorio(RelatorioConsulta relatorio);
+    void salvarRelatorio(RelatorioConsulta relatorio) throws RepositoryException;
 
 }

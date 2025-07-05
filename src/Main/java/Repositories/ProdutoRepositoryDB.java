@@ -2,21 +2,19 @@ package Repositories;
 
 import Application.TipoDeProduto;
 import Entities.Produto;
+import Exceptions.RepositoryException; // Import necessário
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Implementação da interface IProdutoRepository que utiliza JDBC.
- * Esta versão foi corrigida para gerenciar corretamente a conexão Singleton.
- */
+
 public class ProdutoRepositoryDB implements IProdutoRepository {
 
     // 1. A conexão agora é um atributo da classe, obtida uma única vez.
     private final Connection conn = ConnectionFactory.getConnection();
 
     @Override
-    public void salvarProduto(Produto produto) {
+    public void salvarProduto(Produto produto) throws RepositoryException {
         String sql;
         if (produto.getIdProduto() == null || produto.getIdProduto() == 0) {
             sql = "INSERT INTO produto (nome, descricao, preco, categoria) VALUES (?, ?, ?, ?)";
@@ -24,7 +22,6 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
             sql = "UPDATE produto SET nome = ?, descricao = ?, preco = ?, categoria = ? WHERE id = ?";
         }
 
-        // 2. O try-with-resources agora gerencia APENAS o PreparedStatement.
         try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, produto.getNomeProduto());
             stmt.setString(2, produto.getDescricaoProduto());
@@ -34,7 +31,6 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
             if (produto.getIdProduto() != null && produto.getIdProduto() != 0) {
                 stmt.setLong(5, produto.getIdProduto());
             }
-
             stmt.executeUpdate();
 
             if (produto.getIdProduto() == null || produto.getIdProduto() == 0) {
@@ -45,12 +41,12 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao salvar o produto no banco de dados.", e);
         }
     }
 
     @Override
-    public Produto buscarPorIdDoProduto(long id) {
+    public Produto buscarPorIdDoProduto(long id) throws RepositoryException {
         String sql = "SELECT * FROM produto WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, id);
@@ -60,13 +56,13 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao buscar produto por ID.", e);
         }
         return null;
     }
 
     @Override
-    public List<Produto> buscarPorNomeDoProduto(String nome) {
+    public List<Produto> buscarPorNomeDoProduto(String nome) throws RepositoryException {
         String sql = "SELECT * FROM produto WHERE nome LIKE ?";
         List<Produto> produtos = new ArrayList<>();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -77,13 +73,13 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao buscar produtos por nome.", e);
         }
         return produtos;
     }
 
     @Override
-    public List<Produto> buscarPorTipoDeProduto(TipoDeProduto tipo) {
+    public List<Produto> buscarPorTipoDeProduto(TipoDeProduto tipo) throws RepositoryException {
         String sql = "SELECT * FROM produto WHERE categoria = ?";
         List<Produto> produtos = new ArrayList<>();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -94,13 +90,13 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao buscar produtos por tipo.", e);
         }
         return produtos;
     }
 
     @Override
-    public List<Produto> buscarTodosOsProduto() {
+    public List<Produto> buscarTodosOsProduto() throws RepositoryException {
         String sql = "SELECT * FROM produto";
         List<Produto> produtos = new ArrayList<>();
         try (PreparedStatement stmt = conn.prepareStatement(sql);
@@ -109,19 +105,19 @@ public class ProdutoRepositoryDB implements IProdutoRepository {
                 produtos.add(mapearParaProduto(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao buscar todos os produtos.", e);
         }
         return produtos;
     }
 
     @Override
-    public void deletarProduto(long id) {
+    public void deletarProduto(long id) throws RepositoryException {
         String sql = "DELETE FROM produto WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao deletar o produto com ID: " + id, e);
         }
     }
 

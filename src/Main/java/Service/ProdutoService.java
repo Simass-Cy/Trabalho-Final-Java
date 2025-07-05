@@ -3,61 +3,89 @@ package Service;
 import Entities.Produto;
 import Repositories.IProdutoRepository;
 import Repositories.ProdutoRepositoryDB;
-import Application.TipoDeProduto; // Import necessário
-
+import Application.TipoDeProduto;
+import Exceptions.RepositoryException;
+import Exceptions.ServiceException;
 import java.util.List;
 
 public class ProdutoService {
 
     private final IProdutoRepository produtoRepository = new ProdutoRepositoryDB();
 
+    public Produto cadastrarNovoProduto(String nome, String descricao, float preco, TipoDeProduto categoria) throws ServiceException {
+        try {
+            // Validações de Negócio
+            if (nome == null || nome.trim().isEmpty()) {
+                throw new ServiceException("O nome do produto não pode ser vazio.");
+            }
+            if (preco <= 0) {
+                throw new ServiceException("O preço do produto deve ser maior que zero.");
+            }
+            if (categoria == null) {
+                throw new ServiceException("A categoria do produto deve ser definida.");
+            }
 
-    public Produto cadastrarNovoProduto(String nome, String descricao, float preco, TipoDeProduto categoria) throws Exception {
-        System.out.println("SERVICE: Iniciando cadastro de novo produto...");
+            Produto novoProduto = new Produto(null, nome, descricao, preco, categoria);
+            produtoRepository.salvarProduto(novoProduto);
 
-        // Validações de Negócio
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new Exception("O nome do produto não pode ser vazio.");
+            return novoProduto;
+        } catch (RepositoryException e) {
+            throw new ServiceException("Erro na camada de dados ao tentar cadastrar o produto.", e);
         }
-        if (preco <= 0) {
-            throw new Exception("O preço do produto deve ser maior que zero.");
-        }
-        if (categoria == null) {
-            throw new Exception("A categoria do produto deve ser definida.");
-        }
-
-        // Se tudo estiver certo, cria o objeto e chama o repositório
-        Produto novoProduto = new Produto(null, nome, descricao, preco, categoria);
-        produtoRepository.salvarProduto(novoProduto);
-
-        System.out.println("SERVICE: Produto '" + nome + "' cadastrado com sucesso!");
-        return novoProduto;
     }
 
     /**
      * Busca um produto pelo seu ID.
-     * @param id O ID do produto.
-     * @return O produto encontrado.
+     * @throws ServiceException Se ocorrer um erro no banco de dados.
      */
-    public Produto encontrarProdutoPorId(long id) {
-        return produtoRepository.buscarPorIdDoProduto(id);
+    public Produto encontrarProdutoPorId(long id) throws ServiceException {
+        try {
+            return produtoRepository.buscarPorIdDoProduto(id);
+        } catch (RepositoryException e) {
+            throw new ServiceException("Erro ao buscar produto por ID.", e);
+        }
     }
 
     /**
      * Lista todos os produtos de uma determinada categoria.
-     * @param categoria O tipo do produto a ser filtrado.
-     * @return Uma lista de produtos.
+     * @throws ServiceException Se ocorrer um erro no banco de dados.
      */
-    public List<Produto> listarProdutosPorCategoria(TipoDeProduto categoria) {
-        return produtoRepository.buscarPorTipoDeProduto(categoria);
+    public List<Produto> listarProdutosPorCategoria(TipoDeProduto categoria) throws ServiceException {
+        try {
+            return produtoRepository.buscarPorTipoDeProduto(categoria);
+        } catch (RepositoryException e) {
+            throw new ServiceException("Erro ao buscar produtos por categoria.", e);
+        }
     }
 
     /**
      * Retorna a lista de todos os produtos cadastrados.
-     * @return Uma lista de todos os produtos.
+     * @throws ServiceException Se ocorrer um erro no banco de dados.
      */
-    public List<Produto> listarTodosOsProdutos() {
-        return produtoRepository.buscarTodosOsProduto();
+    public List<Produto> listarTodosOsProdutos() throws ServiceException {
+        try {
+            return produtoRepository.buscarTodosOsProduto();
+        } catch (RepositoryException e) {
+            throw new ServiceException("Erro ao buscar todos os produtos.", e);
+        }
     }
+
+    public void deletarProduto(long id) throws ServiceException {
+        try {
+            // Regra de Negócio: Verificar se o produto realmente existe antes de deletar.
+            Produto produtoExistente = produtoRepository.buscarPorIdDoProduto(id);
+            if (produtoExistente == null) {
+                throw new ServiceException("Produto com ID " + id + " não encontrado. Nada a ser deletado.");
+            }
+
+            produtoRepository.deletarProduto(id);
+            System.out.println("SERVICE: Produto '" + produtoExistente.getNomeProduto() + "' deletado com sucesso.");
+
+        } catch (RepositoryException e) {
+            // "Traduz" o erro técnico do repositório para um erro de negócio mais claro.
+            throw new ServiceException("Erro ao deletar o produto. Verifique se ele não está associado a outras partes do sistema.", e);
+        }
+    }
+
 
 }

@@ -6,6 +6,7 @@ import Entities.Veterinario;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import Exceptions.RepositoryException;
 
 /**
  * Implementação da interface IFuncionarioRepository que utiliza JDBC.
@@ -17,7 +18,7 @@ public class FuncionarioRepositoryDB implements IFuncionarioRepository {
     private final Connection conn = ConnectionFactory.getConnection();
 
     @Override
-    public void salvar(Funcionario funcionario) {
+    public void salvarFuncionario(Funcionario funcionario) throws RepositoryException {
         String sql;
         if (funcionario.getIdFuncionario() == null || funcionario.getIdFuncionario() == 0) {
             sql = "INSERT INTO funcionario (nome, email, telefone, senha, cargo, descricao_funcao, crmv) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -25,9 +26,7 @@ public class FuncionarioRepositoryDB implements IFuncionarioRepository {
             sql = "UPDATE funcionario SET nome = ?, email = ?, telefone = ?, senha = ?, cargo = ?, descricao_funcao = ?, crmv = ? WHERE id = ?";
         }
 
-        // 2. O try-with-resources agora gerencia APENAS o PreparedStatement.
         try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
             stmt.setString(1, funcionario.getNomeFuncionario());
             stmt.setString(2, funcionario.getEmailFuncionario());
             stmt.setString(3, funcionario.getTelefoneFuncionario());
@@ -44,7 +43,6 @@ public class FuncionarioRepositoryDB implements IFuncionarioRepository {
             if (funcionario.getIdFuncionario() != null && funcionario.getIdFuncionario() != 0) {
                 stmt.setLong(8, funcionario.getIdFuncionario());
             }
-
             stmt.executeUpdate();
 
             if (funcionario.getIdFuncionario() == null || funcionario.getIdFuncionario() == 0) {
@@ -55,12 +53,12 @@ public class FuncionarioRepositoryDB implements IFuncionarioRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao salvar o funcionário no banco de dados.", e);
         }
     }
 
     @Override
-    public Funcionario buscarPorId(long id) {
+    public Funcionario buscarPorIdFuncionario(long id) throws RepositoryException {
         String sql = "SELECT * FROM funcionario WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, id);
@@ -70,13 +68,13 @@ public class FuncionarioRepositoryDB implements IFuncionarioRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao buscar funcionário por ID.", e);
         }
         return null;
     }
 
     @Override
-    public List<Funcionario> buscarTodos() {
+    public List<Funcionario> buscarTodosFuncionario() throws RepositoryException {
         String sql = "SELECT * FROM funcionario";
         List<Funcionario> funcionarios = new ArrayList<>();
         try (PreparedStatement stmt = conn.prepareStatement(sql);
@@ -85,13 +83,13 @@ public class FuncionarioRepositoryDB implements IFuncionarioRepository {
                 funcionarios.add(mapearParaFuncionario(rs));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao buscar todos os funcionários.", e);
         }
         return funcionarios;
     }
 
     @Override
-    public List<Funcionario> buscarPorCargo(Cargo cargo) {
+    public List<Funcionario> buscarPorCargo(Cargo cargo) throws RepositoryException {
         String sql = "SELECT * FROM funcionario WHERE cargo = ?";
         List<Funcionario> funcionarios = new ArrayList<>();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -102,13 +100,13 @@ public class FuncionarioRepositoryDB implements IFuncionarioRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao buscar funcionários por cargo.", e);
         }
         return funcionarios;
     }
 
     @Override
-    public List<Funcionario> buscarPorNome(String nomeFuncionario) {
+    public List<Funcionario> buscarPorNomeFuncionario(String nomeFuncionario) throws RepositoryException {
         String sql = "SELECT * FROM funcionario WHERE nome LIKE ?";
         List<Funcionario> funcionarios = new ArrayList<>();
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -119,19 +117,36 @@ public class FuncionarioRepositoryDB implements IFuncionarioRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao buscar funcionários por nome.", e);
         }
         return funcionarios;
     }
 
     @Override
-    public void deletar(long id) {
+    public List<Funcionario> buscarPorEmailFuncionario(String email) throws RepositoryException {
+        String sql = "SELECT * FROM funcionario WHERE email = ?";
+        List<Funcionario> funcionarios = new ArrayList<>();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    funcionarios.add(mapearParaFuncionario(rs));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RepositoryException("Erro ao buscar funcionários por email.", e);
+        }
+        return funcionarios;
+    }
+
+    @Override
+    public void deletarFuncionario(long id) throws RepositoryException {
         String sql = "DELETE FROM funcionario WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RepositoryException("Erro ao deletar funcionário com ID: " + id, e);
         }
     }
 
@@ -145,8 +160,6 @@ public class FuncionarioRepositoryDB implements IFuncionarioRepository {
             funcionario = vet;
         } else {
             // Futuramente, esta lógica será expandida para outros cargos
-            // Ex: if (cargo == Cargo.RECEPCIONISTA) { funcionario = new Recepcionista(); }
-            // Por enquanto, é um placeholder.
             throw new IllegalStateException("Cargo não suportado para mapeamento: " + cargo);
         }
 
@@ -160,23 +173,4 @@ public class FuncionarioRepositoryDB implements IFuncionarioRepository {
 
         return funcionario;
     }
-
-    @Override
-    public List<Funcionario> buscarPorEmail(String email) {
-        String sql = "SELECT * FROM funcionario WHERE email = ?";
-        List<Funcionario> funcionarios = new ArrayList<>();
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, email);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    funcionarios.add(mapearParaFuncionario(rs));
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return funcionarios;
-    }
-
-
 }

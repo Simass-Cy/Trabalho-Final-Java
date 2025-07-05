@@ -3,18 +3,19 @@ package Repositories;
 import Entities.Animais;
 import Entities.Cliente;
 import java.util.List;
+import Exceptions.RepositoryException;
 
 public interface IAnimalRepository {
 
-    void salvar(Animais animal);
+    void salvarAnimal(Animais animal) throws RepositoryException;
 
-    Animais buscarPorId(long id);
+    Animais buscarPorIdAnimal(long id) throws RepositoryException;
 
-    List<Animais> buscarPorNome(String nome);
+    List<Animais> buscarPorNomeAnimal(String nome) throws RepositoryException;
 
-    List<Animais> buscarPorDono(Cliente dono);
+    List<Animais> buscarPorDono(Cliente dono) throws RepositoryException;
 
-    List<Animais> buscarTodos();
+    List<Animais> buscarTodosAnimal() throws RepositoryException;
 
-    void deletar(long id);
+    void deletarAnimal(long id) throws RepositoryException;
 }

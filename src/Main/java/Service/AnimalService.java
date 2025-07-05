@@ -2,6 +2,8 @@ package Service;
 
 import Entities.Animais;
 import Entities.Cliente;
+import Exceptions.RepositoryException;
+import Exceptions.ServiceException;
 import Repositories.AnimalRepositoryDB;
 import Repositories.ClienteRepositoryDB;
 import Repositories.IAnimalRepository;
@@ -15,45 +17,45 @@ public class AnimalService {
     private final IClienteRepository clienteRepository = new ClienteRepositoryDB();
 
 
-    public Animais cadastrarNovoAnimal(long idCliente, String nomeAnimal, LocalDate dataNascimento) throws Exception {
-        System.out.println("SERVICE: Iniciando processo de cadastro de novo animal...");
+    public Animais cadastrarNovoAnimal(long idCliente, String nomeAnimal, LocalDate dataNascimento) throws ServiceException {
+        try {
+            //O animal precisa de um dono que exista.
+            Cliente dono = clienteRepository.buscarPorIdCliente(idCliente);
+            if (dono == null) {
+                throw new ServiceException("Cliente com ID " + idCliente + " não encontrado. Não é possível cadastrar o animal.");
+            }
 
-        // Regra de Negócio: O animal precisa de um dono que exista.
-        Cliente dono = clienteRepository.buscarPorId(idCliente);
-        if (dono == null) {
-            throw new Exception("Cliente com ID " + idCliente + " não encontrado. Não é possível cadastrar o animal.");
+            if (nomeAnimal == null || nomeAnimal.trim().isEmpty()) {
+                throw new ServiceException("O nome do animal não pode ser vazio.");
+            }
+
+            Animais novoAnimal = new Animais(null, nomeAnimal, dataNascimento, dono);
+            animalRepository.salvarAnimal(novoAnimal); // Usa o novo nome do método
+
+            return novoAnimal;
+        } catch (RepositoryException e) {
+            // "Traduz" o erro técnico do repositório para um erro de negócio
+            throw new ServiceException("Erro ao comunicar com o banco de dados durante o cadastro do animal.", e);
         }
+    }
 
-        if (nomeAnimal == null || nomeAnimal.trim().isEmpty()) {
-            throw new Exception("O nome do animal não pode ser vazio.");
+    //procura os animais pelo dono
+    public List<Animais> listarAnimaisPorDono(long idCliente) throws ServiceException {
+        try {
+            Cliente dono = new Cliente();
+            dono.setId(idCliente);
+            return animalRepository.buscarPorDono(dono);
+        } catch (RepositoryException e) {
+            throw new ServiceException("Erro ao buscar os animais do cliente.", e);
         }
-
-        // Cria o objeto e chama o repositório para salvar
-        Animais novoAnimal = new Animais(null, nomeAnimal, dataNascimento, dono);
-        animalRepository.salvar(novoAnimal);
-
-        System.out.println("SERVICE: Animal '" + nomeAnimal + "' cadastrado com sucesso para o cliente '" + dono.getNome() + "'.");
-        return novoAnimal;
     }
 
-    /**
-     * Busca todos os animais pertencentes a um cliente.
-     * @param idCliente O ID do cliente.
-     * @return Uma lista com os animais do cliente.
-     */
-    public List<Animais> listarAnimaisPorDono(long idCliente) {
-        Cliente dono = new Cliente();
-        dono.setId(idCliente); // Só precisamos do ID para a busca no repositório
-        return animalRepository.buscarPorDono(dono);
+    //busca o animal pelo id (pk)
+    public Animais encontrarAnimalPorId(long idAnimal) throws ServiceException {
+        try {
+            return animalRepository.buscarPorIdAnimal(idAnimal);
+        } catch (RepositoryException e) {
+            throw new ServiceException("Erro ao buscar o animal por ID.", e);
+        }
     }
-
-    /**
-     * Busca um animal específico pelo seu ID.
-     * @param idAnimal O ID do animal.
-     * @return O animal encontrado.
-     */
-    public Animais encontrarAnimalPorId(long idAnimal) {
-        return animalRepository.buscarPorId(idAnimal);
-    }
-
 }

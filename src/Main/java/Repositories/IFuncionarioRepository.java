@@ -3,21 +3,22 @@ package Repositories;
 import Application.Cargo;
 import Entities.Funcionario;
 import java.util.List;
+import Exceptions.RepositoryException;
 
 public interface IFuncionarioRepository {
 
-    void salvar(Funcionario funcionario);
+    void salvarFuncionario(Funcionario funcionario) throws RepositoryException;
 
-    Funcionario buscarPorId(long id);
+    Funcionario buscarPorIdFuncionario(long id) throws RepositoryException;
 
-    List<Funcionario> buscarTodos();
+    List<Funcionario> buscarTodosFuncionario() throws RepositoryException;
 
-    List<Funcionario> buscarPorCargo(Cargo cargo);
+    List<Funcionario> buscarPorCargo(Cargo cargo) throws RepositoryException;
 
-    List<Funcionario> buscarPorNome(String nomeFuncionario);
+    List<Funcionario> buscarPorNomeFuncionario(String nomeFuncionario) throws RepositoryException;
 
-    void deletar(long id);
+    void deletarFuncionario(long id) throws RepositoryException;
 
-    List<Funcionario> buscarPorEmail(String email);
+    List<Funcionario> buscarPorEmailFuncionario(String email) throws RepositoryException;
 
 }
