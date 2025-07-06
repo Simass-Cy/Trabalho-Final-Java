@@ -11,8 +11,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("--- INICIANDO TESTE COMPLETO DA CAMADA DE SERVIÇO ---");
-        System.out.println("--- INICIANDO TESTE COMPLETO E AUTOMATIZADO ---");
+        System.out.println("--- INICIANDO NOVO TESTE DE OPERAÇÕES ---");
 
         ClienteService clienteService = new ClienteService();
         FuncionarioService funcionarioService = new FuncionarioService();
@@ -22,56 +21,73 @@ public class Main {
         ConsultaService consultaService = new ConsultaService();
 
         try {
-            // --- ETAPA 1: ADICIONANDO NOVOS REGISTROS ---
-            System.out.println("\n>> ETAPA 1: Cadastrando novos Cliente, Veterinário, Animal e Produto...");
+            System.out.println("\n>> ETAPA 1: Adicionando clientes...");
 
-            // Adiciona um novo Cliente
-            Cliente carlaLopes = clienteService.cadastrarNovoCliente("Carla Lopes", "carla.l@teste.com", "senha789", "4444-5555");
-            System.out.println("-> SUCESSO: Cliente '" + carlaLopes.getNome() + "' (ID: " + carlaLopes.getId() + ") foi criado.");
+            Cliente brunoMartins = clienteService.cadastrarNovoCliente("Bruno Martins", "bruno@teste.com", "senhaabc", "4444-4444");
+            Cliente carlaMendes = clienteService.cadastrarNovoCliente("Carla Mendes", "carla@teste.com", "senhaxyz", "5555-5555");
+            Cliente fernandoAlves = clienteService.cadastrarNovoCliente("Fernando Alves", "fernando@teste.com", "senha987", "6666-6666");
 
-            // Adiciona um novo Veterinário
-            Veterinario drGabriel = new Veterinario(null, "Dr. Gabriel", "gabriel.vet@teste.com", "6666-7777", "vetGabriel", "CRMV-SC-54321");
-            funcionarioService.contratarNovoFuncionario(drGabriel);
-            System.out.println("-> SUCESSO: Veterinário '" + drGabriel.getNomeFuncionario() + "' (ID: " + drGabriel.getIdFuncionario() + ") foi criado.");
+            System.out.println("-> Clientes cadastrados com sucesso.");
 
-            // Adiciona um novo Animal para a Carla
-            Animais felix = animalService.cadastrarNovoAnimal(carlaLopes.getId(), "Félix", LocalDate.now().minusYears(5));
-            System.out.println("-> SUCESSO: Animal '" + felix.getNomeAnimal() + "' (ID: " + felix.getIdAnimal() + ") foi criado para a cliente '" + carlaLopes.getNome() + "'.");
+            System.out.println("\n>> ETAPA 2: Excluindo cliente Fernando Alves...");
+            clienteService.deletarCliente(fernandoAlves.getId());
+            System.out.println("-> Cliente 'Fernando Alves' excluído com sucesso.");
 
-            // Adiciona um novo Produto
-            Produto vitamina = produtoService.cadastrarNovoProduto("Vitamina para Pelos", "Suplemento vitamínico para fortalecimento de pelos.", 75.20f, TipoDeProduto.MEDICAMENTO);
-            System.out.println("-> SUCESSO: Produto '" + vitamina.getNomeProduto() + "' (ID: " + vitamina.getIdProduto() + ") foi criado.");
+            System.out.println("\n>> ETAPA 3: Buscando cliente Bruno Martins e listando seus animais...");
+            Cliente clienteBuscado = clienteService.encontrarClientePorId(brunoMartins.getId());
+            List<Animais> animaisBruno = animalService.listarAnimaisPorDono(clienteBuscado.getId());
+            System.out.println("-> Cliente '" + clienteBuscado.getNome() + "' possui " + animaisBruno.size() + " animal(is) cadastrado(s).");
+
+            System.out.println("\n>> ETAPA 4: Cadastrando animais...");
+
+            Animais thor = animalService.cadastrarNovoAnimal(brunoMartins.getId(), "Thor", LocalDate.now().minusYears(4));
+            Animais nina = animalService.cadastrarNovoAnimal(carlaMendes.getId(), "Nina", LocalDate.now().minusYears(1));
+            try {
+                Animais semDono = animalService.cadastrarNovoAnimal(999L, "Sombra", LocalDate.now().minusYears(2));
+            } catch (ServiceException e) {
+                System.err.println("-> ERRO TRATADO: Tentativa de cadastrar animal sem dono. Mensagem: " + e.getMessage());
+            }
+
+            System.out.println("-> Animais 'Thor' e 'Nina' cadastrados com sucesso.");
+git
+            System.out.println("\n>> ETAPA 5: Buscando animal 'Nina'...");
+            Animais ninaBuscada = animalService.encontrarAnimalPorId(nina.getIdAnimal());
+            System.out.println("-> Animal encontrado: " + ninaBuscada.getNomeAnimal());
 
 
-            // --- ETAPA 2: REALIZANDO O FLUXO DE CONSULTA ---
-            System.out.println("\n>> ETAPA 2: Realizando o fluxo completo de consulta...");
+            System.out.println("\n>> ETAPA 7: Adicionando veterinário e realizando agendamento...");
 
-            // Agenda a consulta
-            Agendamento agendamentoFelix = agendamentoService.agendarNovaConsulta(carlaLopes.getId(), felix.getIdAnimal(), drGabriel.getIdFuncionario(), LocalDateTime.now().plusHours(2));
-            System.out.println("-> SUCESSO: Agendamento para '" + felix.getNomeAnimal() + "' foi criado.");
+            Veterinario draRenata = new Veterinario(null, "Dra. Renata", "renata@vet.com", "9999-0000", "vetRenata", "CRMV-RJ-22222");
+            funcionarioService.contratarNovoFuncionario(draRenata);
+            System.out.println("-> Veterinária '" + draRenata.getNomeFuncionario() + "' contratada com sucesso.");
 
-            // Realiza a consulta e cria uma receita
-            String descConsulta = "Animal apresentando queda de pelos excessiva.";
-            String descReceita = "Administrar suplemento vitamínico 'Vitamina para Pelos' uma vez ao dia.";
-            Consulta consultaFelix = consultaService.realizarConsulta(agendamentoFelix.getId(), descConsulta, descReceita);
-            System.out.println("-> SUCESSO: Consulta realizada e registrada com ID: " + consultaFelix.getId() + ". Receita associada com ID: " + consultaFelix.getReceita().getId());
+            Agendamento agendamentoNina = agendamentoService.agendarNovaConsulta(carlaMendes.getId(), nina.getIdAnimal(), draRenata.getIdFuncionario(), LocalDateTime.now().plusDays(1));
+            System.out.println("-> Agendamento criado para 'Nina' com a Dra. Renata.");
 
+            System.out.println("\n>> ETAPA 8: Realizando consulta...");
+            String descConsulta = "Animal com falta de apetite e sono excessivo.";
+            String descReceita = "Suplemento vitamínico diário e nova ração recomendada.";
+            Consulta consultaNina = consultaService.realizarConsulta(agendamentoNina.getId(), descConsulta, descReceita);
+            System.out.println("-> Consulta registrada com ID: " + consultaNina.getId() + ". Receita ID: " + consultaNina.getReceita().getId());
 
-            // --- ETAPA 3: VERIFICAÇÃO FINAL ---
-            System.out.println("\n>> ETAPA 3: Verificando alguns dos dados recém-criados...");
+            System.out.println("\n>> ETAPA 9: Cadastrando produtos...");
+            produtoService.cadastrarNovoProduto("Ração Premium 15kg", "Ração completa para cães adultos de porte médio e grande", 199.90f, TipoDeProduto.ALIMENTO);
+            produtoService.cadastrarNovoProduto("Shampoo Antipulgas", "Shampoo veterinário antipulgas para cães e gatos", 39.99f, TipoDeProduto.HIGIENE);
+            produtoService.cadastrarNovoProduto("Brinquedo Mordedor", "Mordedor resistente ideal para cães filhotes e adultos", 24.50f, TipoDeProduto.BRINQUEDO);
+            System.out.println("-> Produtos cadastrados com sucesso.");
 
-            List<Animais> animaisDaCarla = animalService.listarAnimaisPorDono(carlaLopes.getId());
-            System.out.println("-> Verificação: A cliente '" + carlaLopes.getNome() + "' possui " + animaisDaCarla.size() + " animal(is) cadastrado(s).");
-
-            Produto produtoBuscado = produtoService.encontrarProdutoPorId(vitamina.getIdProduto());
-            System.out.println("-> Verificação: O produto buscado por ID é '" + produtoBuscado.getNomeProduto() + "'.");
-
+            System.out.println("\n>> ETAPA 10: Geração de relatório final...");
+            System.out.println("-> Cliente: " + carlaMendes.getNome());
+            System.out.println("-> Animal: " + nina.getNomeAnimal());
+            System.out.println("-> Veterinária: " + draRenata.getNomeFuncionario());
+            System.out.println("-> Consulta: " + consultaNina.getDescricao());
+            System.out.println("-> Receita: " + consultaNina.getReceita().getDescricao());
 
         } catch (ServiceException e) {
-            System.err.println("\n!!! OCORREU UM ERRO INESPERADO DURANTE O TESTE !!!");
+            System.err.println("\n!!! ERRO INESPERADO DURANTE O PROCESSO !!!");
             e.printStackTrace();
         }
 
-        System.out.println("\n--- TESTE FINALIZADO. OS DADOS PERMANECEM NO BANCO DE DADOS. ---");
+        System.out.println("\n--- TESTE CONCLUÍDO COM SUCESSO ---");
     }
 }

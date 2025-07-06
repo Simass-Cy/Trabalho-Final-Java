@@ -4,7 +4,7 @@ import Application.StatusAgendamento;
 import Entities.Agendamento;
 import Entities.Cliente;
 import Entities.Funcionario;
-import Exceptions.RepositoryException; // Importa a nossa exceção
+import Exceptions.RepositoryException;
 import java.time.LocalDate;
 import java.util.List;
 

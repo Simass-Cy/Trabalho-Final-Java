@@ -16,7 +16,6 @@ public class FuncionarioService {
 
     public Funcionario contratarNovoFuncionario(Funcionario funcionario) throws ServiceException {
         try {
-            // Validações
             if (funcionario == null || funcionario.getNomeFuncionario().trim().isEmpty()) {
                 throw new ServiceException("Os dados do funcionário não podem ser nulos ou vazios.");
             }
@@ -24,7 +23,6 @@ public class FuncionarioService {
                 throw new ServiceException("O formato do email do funcionário é inválido.");
             }
 
-            // Usa o novo nome do método do repositório
             if (!funcionarioRepository.buscarPorEmailFuncionario(funcionario.getEmailFuncionario()).isEmpty()) {
                 throw new ServiceException("Já existe um funcionário cadastrado com este email.");
             }
@@ -36,7 +34,6 @@ public class FuncionarioService {
                 }
             }
 
-            // Usa o novo nome do método e trata a exceção
             funcionarioRepository.salvarFuncionario(funcionario);
 
             return funcionario;
@@ -45,12 +42,7 @@ public class FuncionarioService {
         }
     }
 
-    /**
-     * Busca todos os funcionários de um determinado cargo.
-     * @param cargo O cargo a ser filtrado.
-     * @return Uma lista de funcionários.
-     * @throws ServiceException Se ocorrer um erro no banco de dados.
-     */
+
     public List<Funcionario> listarFuncionariosPorCargo(Cargo cargo) throws ServiceException {
         try {
             return funcionarioRepository.buscarPorCargo(cargo);
@@ -59,10 +51,7 @@ public class FuncionarioService {
         }
     }
 
-    /**
-     * Busca um funcionário pelo seu ID.
-     * @throws ServiceException Se ocorrer um erro no banco de dados.
-     */
+
     public Funcionario encontrarFuncionarioPorId(long id) throws ServiceException {
         try {
             return funcionarioRepository.buscarPorIdFuncionario(id);
@@ -71,10 +60,7 @@ public class FuncionarioService {
         }
     }
 
-    /**
-     * Retorna a lista de todos os funcionários.
-     * @throws ServiceException Se ocorrer um erro no banco de dados.
-     */
+
     public List<Funcionario> listarTodosOsFuncionarios() throws ServiceException {
         try {
             return funcionarioRepository.buscarTodosFuncionario();
@@ -85,20 +71,17 @@ public class FuncionarioService {
 
     public void deletarFuncionario(long id) throws ServiceException {
         try {
-            // Regra de Negócio 1: Verificar se o funcionário realmente existe.
+            // Verificar se o funcionário existe.
             Funcionario funcionarioExistente = funcionarioRepository.buscarPorIdFuncionario(id);
             if (funcionarioExistente == null) {
                 throw new ServiceException("Funcionário com ID " + id + " não encontrado. Nada a deletar.");
             }
 
-            // Tenta deletar. O banco de dados irá lançar um erro se houver dependências
-            // (chaves estrangeiras em 'agendamento' ou 'consulta'). Nosso catch irá tratar isso.
             funcionarioRepository.deletarFuncionario(id);
 
             System.out.println("SERVICE: Funcionário '" + funcionarioExistente.getNomeFuncionario() + "' deletado com sucesso.");
 
         } catch (RepositoryException e) {
-            // "Traduz" o erro técnico do repositório para um erro de negócio mais claro.
             throw new ServiceException("Erro ao deletar o funcionário. Verifique se ele não está associado a agendamentos ou consultas existentes.", e);
         }
     }

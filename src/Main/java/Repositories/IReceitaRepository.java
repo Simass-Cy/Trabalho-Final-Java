@@ -1,7 +1,7 @@
 package Repositories;
 
 import Entities.Receita;
-import Exceptions.RepositoryException; // Importa a exceção
+import Exceptions.RepositoryException;
 import java.util.List;
 
 public interface IReceitaRepository {

@@ -2,7 +2,7 @@ package Repositories;
 
 import Entities.Animais;
 import Entities.Cliente;
-import Exceptions.RepositoryException; // 1. Importa a nossa nova exceção
+import Exceptions.RepositoryException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -142,7 +142,7 @@ public class ClienteRepositoryDB implements IClienteRepository {
 
     @Override
     public void adicionarAnimalAoCliente(Cliente cliente, Animais animal) throws RepositoryException {
-        // Esta lógica apenas cria a associação. O animal deve ser salvo separadamente.
+        // apenas para ligacao, animal ja tem que existir
         String sql = "UPDATE animal SET id_cliente = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, cliente.getId());

@@ -24,7 +24,6 @@ public class Produto {
 
     //Sobrecarga de construtor adicionado idProduto
 
-
     public Produto(Long idProduto, String nomeProduto, String descricaoProduto, float precoProduto, TipoDeProduto categoria) {
         this(nomeProduto,descricaoProduto,precoProduto,categoria);
         this.idProduto = idProduto;

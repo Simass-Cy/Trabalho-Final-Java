@@ -34,12 +34,10 @@ public class AnimalService {
 
             return novoAnimal;
         } catch (RepositoryException e) {
-            // "Traduz" o erro técnico do repositório para um erro de negócio
             throw new ServiceException("Erro ao comunicar com o banco de dados durante o cadastro do animal.", e);
         }
     }
 
-    //procura os animais pelo dono
     public List<Animais> listarAnimaisPorDono(long idCliente) throws ServiceException {
         try {
             Cliente dono = new Cliente();

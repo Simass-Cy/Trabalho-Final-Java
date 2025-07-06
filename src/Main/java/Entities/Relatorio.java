@@ -21,7 +21,6 @@ public abstract class Relatorio {
     }
 
     // gets e sets
-
     public long getId() {
         return id;
     }

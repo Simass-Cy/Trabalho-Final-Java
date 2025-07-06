@@ -3,7 +3,7 @@ package Entities;
 
 public class Receita {
 
-    private long id; // Renomeado para seguir o padrão
+    private long id;
     private String descricao;
 
     // no args constructor

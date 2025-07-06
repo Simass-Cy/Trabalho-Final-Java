@@ -7,11 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Exceptions.RepositoryException;
 
-/**
- * Implementação da interface IAnimalRepository que utiliza JDBC para
- * interagir com o banco de dados.
- * Esta versão foi corrigida para gerenciar corretamente a conexão Singleton.
- */
+
 public class AnimalRepositoryDB implements IAnimalRepository {
 
     private final Connection conn = ConnectionFactory.getConnection();
@@ -127,7 +123,6 @@ public class AnimalRepositoryDB implements IAnimalRepository {
 
     private Animais mapearParaAnimal(ResultSet rs) throws SQLException, RepositoryException {
         long idCliente = rs.getLong("id_cliente");
-        // AQUI ESTÁ A CORREÇÃO, usando o nome correto do método da interface
         Cliente dono = clienteRepository.buscarPorIdCliente(idCliente);
 
         if (dono == null) {

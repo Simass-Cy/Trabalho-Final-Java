@@ -80,15 +80,12 @@ public class ClienteService {
 
     public void deletarCliente(long id) throws ServiceException {
         try {
-            // Regra de Negócio: Verificar se o cliente realmente existe antes de tentar deletar.
+            // Verificar se o cliente existe antes de tentar deletar.
             Cliente clienteExistente = clienteRepository.buscarPorIdCliente(id);
             if (clienteExistente == null) {
                 throw new ServiceException("Cliente com ID " + id + " não encontrado. Nada a ser deletado.");
             }
 
-            // Tenta deletar. O banco de dados irá impedir a deleção se houver
-            // chaves estrangeiras apontando para este cliente (ex: na tabela agendamento).
-            // Nosso bloco catch irá tratar esse erro.
             clienteRepository.deletarCliente(id);
 
             System.out.println("SERVICE: Cliente '" + clienteExistente.getNome() + "' deletado com sucesso.");

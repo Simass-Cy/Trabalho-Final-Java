@@ -8,13 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import Exceptions.RepositoryException;
 
-/**
- * Implementação da interface IFuncionarioRepository que utiliza JDBC.
- * Esta versão foi corrigida para gerenciar corretamente a conexão Singleton.
- */
+
 public class FuncionarioRepositoryDB implements IFuncionarioRepository {
 
-    // 1. A conexão agora é um atributo da classe, obtida uma única vez.
     private final Connection conn = ConnectionFactory.getConnection();
 
     @Override

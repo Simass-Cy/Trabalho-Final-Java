@@ -66,23 +66,19 @@ public class AgendamentoService {
     }
     public void deletarAgendamento(long idAgendamento) throws ServiceException {
         try {
-            // Regra de Negócio 1: Verificar se o agendamento existe.
             Agendamento agendamento = agendamentoRepository.buscarPorIdAgendamento(idAgendamento);
             if (agendamento == null) {
                 throw new ServiceException("Agendamento com ID " + idAgendamento + " não encontrado. Nada a deletar.");
             }
 
-            // Regra de Negócio 2 (Exemplo): Não permitir deletar agendamentos que já foram realizados.
             if (agendamento.getStatus() == StatusAgendamento.REALIZADO) {
                 throw new ServiceException("Não é possível deletar um agendamento que já foi realizado, pois ele faz parte do histórico.");
             }
 
-            // Se as regras de negócio passaram, chama o repositório para deletar.
             agendamentoRepository.deletarAgendamento(idAgendamento);
             System.out.println("SERVICE: Agendamento ID " + idAgendamento + " deletado com sucesso.");
 
         } catch (RepositoryException e) {
-            // "Traduz" o erro técnico do repositório para um erro de negócio mais claro.
             throw new ServiceException("Erro na camada de dados ao tentar deletar o agendamento.", e);
         }
     }

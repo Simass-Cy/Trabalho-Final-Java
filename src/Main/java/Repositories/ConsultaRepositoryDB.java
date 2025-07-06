@@ -127,7 +127,6 @@ public class ConsultaRepositoryDB implements IConsultaRepository {
         Animais animal = animalRepository.buscarPorIdAnimal(idAnimal);
         Receita receita = null;
         if (idReceita != 0) {
-            // Lógica para buscar receita viria aqui com IReceitaRepository
         }
 
         Consulta consulta = new Consulta();

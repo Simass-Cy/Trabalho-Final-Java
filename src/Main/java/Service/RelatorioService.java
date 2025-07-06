@@ -11,7 +11,6 @@ import java.util.List;
 
 public class RelatorioService {
 
-    // 1. O Service depende dos repositórios para buscar os dados brutos.
     private final IConsultaRepository consultaRepository = new ConsultaRepositoryDB();
     private final IFuncionarioRepository funcionarioRepository = new FuncionarioRepositoryDB();
     private final IRelatorioRepository relatorioRepository = new RelatorioRepositoryDB(); // O repositório para salvar o próprio relatório
@@ -19,7 +18,7 @@ public class RelatorioService {
 
     public RelatorioConsulta gerarESalvarRelatorioDeConsultas(long idAutor, LocalDate inicio, LocalDate fim) throws ServiceException {
         try {
-            // 1. USA os repositórios para buscar os dados necessários.
+            // procura os dados
             Funcionario autor = funcionarioRepository.buscarPorIdFuncionario(idAutor);
             if (autor == null) {
                 throw new ServiceException("Autor com ID " + idAutor + " não encontrado. Não é possível gerar o relatório.");
@@ -30,10 +29,10 @@ public class RelatorioService {
                 System.out.println("SERVICE_INFO: Nenhuma consulta encontrada no período. O relatório será gerado vazio, mas será salvo.");
             }
 
-            // 2. MONTA o objeto de domínio com os dados coletados.
+            // monta o objeto
             RelatorioConsulta relatorio = new RelatorioConsulta(0L, autor, inicio, fim, consultas);
 
-            // 3. CHAMA o repositório apropriado para persistir o novo objeto.
+            // chama o repositorio pro objeto
             relatorioRepository.salvarRelatorio(relatorio);
 
             System.out.println("SERVICE: Relatório gerado e salvo com sucesso com o ID: " + relatorio.getId());

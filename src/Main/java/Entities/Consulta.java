@@ -14,7 +14,6 @@ public class Consulta {
     private Agendamento agendamentoOrigem;
 
     //no args constructor
-    //NO ARGS CONSTRUCTOR NÃO MEXER
     public Consulta() {
     }
 

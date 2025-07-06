@@ -34,10 +34,7 @@ public class ProdutoService {
         }
     }
 
-    /**
-     * Busca um produto pelo seu ID.
-     * @throws ServiceException Se ocorrer um erro no banco de dados.
-     */
+
     public Produto encontrarProdutoPorId(long id) throws ServiceException {
         try {
             return produtoRepository.buscarPorIdDoProduto(id);
@@ -46,10 +43,7 @@ public class ProdutoService {
         }
     }
 
-    /**
-     * Lista todos os produtos de uma determinada categoria.
-     * @throws ServiceException Se ocorrer um erro no banco de dados.
-     */
+
     public List<Produto> listarProdutosPorCategoria(TipoDeProduto categoria) throws ServiceException {
         try {
             return produtoRepository.buscarPorTipoDeProduto(categoria);
@@ -58,10 +52,7 @@ public class ProdutoService {
         }
     }
 
-    /**
-     * Retorna a lista de todos os produtos cadastrados.
-     * @throws ServiceException Se ocorrer um erro no banco de dados.
-     */
+
     public List<Produto> listarTodosOsProdutos() throws ServiceException {
         try {
             return produtoRepository.buscarTodosOsProduto();
@@ -72,7 +63,6 @@ public class ProdutoService {
 
     public void deletarProduto(long id) throws ServiceException {
         try {
-            // Regra de Negócio: Verificar se o produto realmente existe antes de deletar.
             Produto produtoExistente = produtoRepository.buscarPorIdDoProduto(id);
             if (produtoExistente == null) {
                 throw new ServiceException("Produto com ID " + id + " não encontrado. Nada a ser deletado.");
@@ -82,7 +72,6 @@ public class ProdutoService {
             System.out.println("SERVICE: Produto '" + produtoExistente.getNomeProduto() + "' deletado com sucesso.");
 
         } catch (RepositoryException e) {
-            // "Traduz" o erro técnico do repositório para um erro de negócio mais claro.
             throw new ServiceException("Erro ao deletar o produto. Verifique se ele não está associado a outras partes do sistema.", e);
         }
     }

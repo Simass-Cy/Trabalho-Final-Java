@@ -5,7 +5,7 @@ import Entities.Agendamento;
 import Entities.Animais;
 import Entities.Cliente;
 import Entities.Funcionario;
-import Exceptions.RepositoryException; // Import necessário
+import Exceptions.RepositoryException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AgendamentoRepositoryDB implements IAgendamentoRepository {
 
-    // 1. A conexão e os outros repositórios agora são atributos da classe.
+    // conexão e os outros repositories
     private final Connection conn = ConnectionFactory.getConnection();
     private final IClienteRepository clienteRepository = new ClienteRepositoryDB();
     private final IAnimalRepository animalRepository = new AnimalRepositoryDB();
