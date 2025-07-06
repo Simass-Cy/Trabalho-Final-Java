@@ -49,7 +49,7 @@ public class Main {
             }
 
             System.out.println("-> Animais 'Thor' e 'Nina' cadastrados com sucesso.");
-git
+
             System.out.println("\n>> ETAPA 5: Buscando animal 'Nina'...");
             Animais ninaBuscada = animalService.encontrarAnimalPorId(nina.getIdAnimal());
             System.out.println("-> Animal encontrado: " + ninaBuscada.getNomeAnimal());
