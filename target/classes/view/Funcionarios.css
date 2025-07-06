@@ -1,0 +1,140 @@
+/* Estilo geral do AnchorPane */
+.root {
+    -fx-background-color: #f0f5f9;
+    -fx-font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Estilo da tabela */
+#Tabelafuncionarios {
+    -fx-background-color: white;
+    -fx-border-color: #d1e0ed;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);
+}
+
+/* Estilo das colunas da tabela */
+.table-column {
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 14px;
+}
+
+/* Estilo do cabeçalho da tabela */
+.column-header {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+/* Estilo das células da tabela */
+.table-cell {
+    -fx-padding: 8px;
+    -fx-border-color: transparent transparent #e6f2ff transparent;
+}
+
+/* Estilo do GridPane do formulário */
+#txtidfuncionario {
+    -fx-background-color: white;
+    -fx-border-color: #3498db;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);
+}
+
+/* Estilo dos labels do formulário */
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Estilo dos títulos principais */
+.label[text="Tabela Funcionarios"],
+.label[text="Registrar funcionario"] {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2980b9;
+}
+
+/* Estilo dos campos de texto */
+.text-field {
+    -fx-font-size: 14px;
+    -fx-pref-height: 30px;
+    -fx-background-radius: 4px;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 4px;
+    -fx-prompt-text-fill: #95a5a6;
+}
+
+/* Estilo do ComboBox */
+#comboboxcargofuncionario {
+    -fx-font-size: 14px;
+    -fx-background-radius: 4px;
+    -fx-border-color: #bdc3c7;
+}
+
+/* Estilo dos botões */
+.button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: #3498db;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 1);
+}
+
+/* Estilo hover dos botões */
+.button:hover {
+    -fx-background-color: #2980b9;
+    -fx-cursor: hand;
+}
+
+/* Estilo pressed dos botões */
+.button:pressed {
+    -fx-background-color: #2472a4;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 2, 0, 0, 1);
+}
+
+/* Estilo específico para o botão excluir */
+#botaoexcluir {
+    -fx-background-color: #e74c3c;
+}
+
+#botaoexcluir:hover {
+    -fx-background-color: #c0392b;
+}
+
+#botaoexcluir:pressed {
+    -fx-background-color: #a5281b;
+}
+
+/* Estilo do botão limpar */
+#botaolimpar {
+    -fx-background-color: #95a5a6;
+}
+
+#botaolimpar:hover {
+    -fx-background-color: #7f8c8d;
+}
+
+#botaolimpar:pressed {
+    -fx-background-color: #6c7a7d;
+}
+
+/* Efeito hover nas linhas da tabela */
+.table-row-cell:hover {
+    -fx-background-color: #e6f2ff;
+}
+
+/* Estilo para linha selecionada */
+.table-row-cell:selected {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+/* Estilo para linhas alternadas */
+.table-row-cell:odd {
+    -fx-background-color: #f8fbfe;
+}

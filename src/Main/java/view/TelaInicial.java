@@ -13,7 +13,7 @@ public class TelaInicial extends Application{
         FXMLLoader fxmlLoader = new FXMLLoader(TelaInicial.class.getResource("TelaInicial.fxml"));
         BorderPane noRaiz = new BorderPane();
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        scene.getStylesheets().add(getClass().getResource("css/Telainicial.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("Telainicial.css").toExternalForm());
 
 
         primarystage.setTitle("Clinica Veterinaria ");

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Telaagendamento.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Agendamentocontroller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@Telaagendamento.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Agendamentocontroller">
    <children>
       <Label layoutX="313.0" layoutY="24.0" text="Agendamento consulta" textFill="#433e3e">
          <font>
@@ -30,7 +30,7 @@
       <TextField fx:id="nomeanimal" layoutX="195.0" layoutY="183.0" />
       <TextField fx:id="nometutor" layoutX="542.0" layoutY="184.0" prefHeight="38.0" prefWidth="175.0" />
       <ComboBox fx:id="combopet" layoutX="182.0" layoutY="88.0" prefHeight="38.0" prefWidth="175.0" promptText="Selecione seu Pet" />
-      <Label layoutX="48.0" layoutY="289.0" text="RG" textFill="#433e3e">
+      <Label layoutX="48.0" layoutY="289.0" text="CPF" textFill="#433e3e">
          <font>
             <Font name="Cambria Math" size="18.0" />
          </font>
