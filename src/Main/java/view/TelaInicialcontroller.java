@@ -45,7 +45,7 @@ public class TelaInicialcontroller {
             e.printStackTrace();
         }
     }
-        @FXML
+    @FXML
     private void abrircadastroanimais() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RegistroAnimais.fxml"));
