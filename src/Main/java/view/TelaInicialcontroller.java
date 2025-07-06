@@ -97,4 +97,38 @@ public class TelaInicialcontroller {
         }
 
     }
+    @FXML
+    private void abrirfuncionarios() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Funcionarios.fxml"));
+            Parent root = loader.load();
+
+            Stage stage4 = new Stage(); // nova janela
+            stage4.setTitle("FUNCIONARIOS ");
+
+            stage4.setScene(new Scene(root));
+            stage4.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @FXML
+    private void abrirrelatorio() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Relatorio.fxml"));
+            Parent root = loader.load();
+
+            Stage stage5 = new Stage(); // nova janela
+            stage5.setTitle("RELATORIOS ");
+
+            stage5.setScene(new Scene(root));
+            stage5.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

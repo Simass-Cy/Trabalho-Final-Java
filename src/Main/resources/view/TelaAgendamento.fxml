@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@Telaagendamento.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Agendamentocontroller">
+   <children>
+      <Label layoutX="313.0" layoutY="24.0" text="Agendamento consulta" textFill="#433e3e">
+         <font>
+            <Font name="Cambria Math" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="190.0" text="nome do animal" textFill="#433e3e">
+         <font>
+            <Font name="Cambria Math" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="451.0" layoutY="190.0" text="seu nome" textFill="#433e3e">
+         <font>
+            <Font name="Cambria Math" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="370.0" text="Data da consulta" textFill="#433e3e">
+         <font>
+            <Font name="Cambria Math" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="rgtutor" layoutX="195.0" layoutY="282.0" prefHeight="38.0" prefWidth="175.0" />
+      <TextField fx:id="nomeanimal" layoutX="195.0" layoutY="183.0" />
+      <TextField fx:id="nometutor" layoutX="542.0" layoutY="184.0" prefHeight="38.0" prefWidth="175.0" />
+      <ComboBox fx:id="combopet" layoutX="182.0" layoutY="88.0" prefHeight="38.0" prefWidth="175.0" promptText="Selecione seu Pet" />
+      <Label layoutX="48.0" layoutY="289.0" text="CPF" textFill="#433e3e">
+         <font>
+            <Font name="Cambria Math" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="telefonetutor" layoutX="542.0" layoutY="269.0" />
+      <Label layoutX="447.0" layoutY="277.0" text="Telefone" textFill="#433e3e">
+         <font>
+            <Font name="Cambria Math" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="451.0" layoutY="370.0" text="Horario" textFill="#433e3e">
+         <font>
+            <Font name="Cambria Math" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="horarioconsulta" layoutX="542.0" layoutY="363.0" />
+      <Button fx:id="salvaragendamento" layoutX="453.0" layoutY="479.0" mnemonicParsing="false" text="SALVAR AGENDAMENTO" />
+      <Button fx:id="botaolimpar" layoutX="183.0" layoutY="479.0" mnemonicParsing="false" onAction="#limpar" text="Limpar" />
+      <DatePicker fx:id="dataconsulta" layoutX="195.0" layoutY="363.0" prefHeight="38.0" prefWidth="175.0" />
+   </children>
+</Pane>

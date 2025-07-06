@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@Funcionarios.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Funcionariocontroller">
+   <children>
+      <TableView fx:id="Tabelafuncionarios" layoutY="33.0" prefHeight="414.0" prefWidth="460.0">
+        <columns>
+          <TableColumn fx:id="colunaidfuncionario" prefWidth="82.0" text="Id" />
+          <TableColumn fx:id="colunanomefuncionario" prefWidth="132.0" text="Nome" />
+            <TableColumn fx:id="colunacargofuncionario" prefWidth="142.0" text="Cargo" />
+            <TableColumn fx:id="colunaemailfuncionario" prefWidth="443.0" text="Email" />
+        </columns>
+      </TableView>
+      <GridPane fx:id="txtidfuncionario" layoutX="461.0" layoutY="45.0" prefHeight="404.0" prefWidth="337.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Nome" GridPane.rowIndex="1" />
+            <Label text="ID" />
+            <Label text="Email" GridPane.rowIndex="2" />
+            <Label text="Cargo" GridPane.rowIndex="3" />
+            <TextField GridPane.columnIndex="1" />
+            <TextField fx:id="txtnomefuncionario" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtemailfuncionario" prefHeight="25.0" prefWidth="258.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="comboboxcargofuncionario" prefHeight="43.0" prefWidth="201.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <Label layoutX="196.0" layoutY="6.0" text="Tabela Funcionarios" />
+      <Label layoutX="543.0" layoutY="6.0" text="Registrar funcionario" />
+      <Button fx:id="botaolimpar" layoutX="516.0" layoutY="466.0" mnemonicParsing="false" text="Limpar " />
+      <Button fx:id="botaosalvar" layoutX="637.0" layoutY="466.0" mnemonicParsing="false" text="Salvar" />
+      <Button fx:id="botaoexcluir" layoutX="224.0" layoutY="466.0" mnemonicParsing="false" text="Excluir" />
+   </children>
+</AnchorPane>
